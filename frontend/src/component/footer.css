@@ -1,0 +1,18 @@
+.page-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+    background-color: rgb(221, 221, 221);
+    margin-bottom: 0;
+    margin-right: 0;
+    margin-left: 0;
+    padding: 0;
+    height: 70px;
+  }
+  
+  .left-footer,
+  .right-footer {
+    padding: 10px;
+    font-size: 20px;
+  }

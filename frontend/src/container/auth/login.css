@@ -1,0 +1,17 @@
+.logindetail {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+}
+
+.login-title {
+  margin: 30px;
+}
+
+.login-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

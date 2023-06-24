@@ -1,0 +1,17 @@
+.registerdetail{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+    padding: 0;
+    margin: 0;
+  }
+
+.register-title {
+  margin: 30px;
+}
+
+.register-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

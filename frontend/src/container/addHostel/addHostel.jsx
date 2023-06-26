@@ -1,6 +1,9 @@
 import Layout from "../../component/Layout";
 import { Button, Upload, Form, Input } from "antd";
 import "./addHostel.css";
+import axios from "axios";
+import { Radio } from 'antd';
+import { useState } from 'react';
 
 const props = {
   name: "file",
@@ -13,18 +16,37 @@ const props = {
       console.log(info.file, info.fileList);
     }
     if (info.file.status === "done") {
-      message.success(`${info.file.name} file uploaded successfully`);
+      // message.success(`${info.file.name} file uploaded successfully`);
     } else if (info.file.status === "error") {
-      message.error(`${info.file.name} file upload failed.`);
+      // message.error(`${info.file.name} file upload failed.`);
     }
   },
 };
 const AddHostel = () => {
-  const onFinish = (values) => {
+  const onFinish = async (values) => {
     console.log("Success:", values);
+
+    const { data } = await axios.post(
+      "http://localhost:8000/api/hostel/add_hostel",
+      {
+        price: values.price,
+        title: values.place_title,
+        description: values.place_descriptioon,
+        phone: values.phone,
+        address: values.address,
+      }
+    );
+    if (data) {
+     alert("hostel added successfully");
+    }
   };
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
+  };
+  const [value, setValue] = useState(1);
+  const onChange = (e) => {
+    console.log('radio checked', e.target.value);
+    setValue(e.target.value);
   };
   return (
     <Layout>
@@ -35,6 +57,11 @@ const AddHostel = () => {
           onFinishFailed={onFinishFailed}
           autoComplete="off"
         >
+           <Radio.Group onChange={onChange} value={value}>
+      <Radio value={1}>Boys Hostel</Radio>
+      <Radio value={2}>Girls Hostel</Radio>
+      
+    </Radio.Group>
           <Form.Item
             label="Place title"
             name="place_title"

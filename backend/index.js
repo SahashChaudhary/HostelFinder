@@ -5,6 +5,7 @@ const cors = require("cors");
 const app = express();
 const connectdb = require("./database/connectdb");
 const hostelRoute = require("./database/routes/hostelRoute");
+const userRoute = require("./database/routes/userRoute");
 
 app.use(bodyParser.json());
 app.use(cors());
@@ -15,6 +16,7 @@ app.get("/get", () => {
 
 //routes
 app.use("/api/hostel", hostelRoute);
+app.use("/api/auth", userRoute);
 
 //database connection
 connectdb();

@@ -117,7 +117,7 @@ const AddHostel = () => {
             }}
           >
             <Button className="add-submit-button" type="primary" htmlType="submit">
-              Submit
+              Submit 
             </Button>
           </Form.Item>
         </Form>

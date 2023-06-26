@@ -1,3 +1,9 @@
 .form_input{
     padding: 20px;
 }
+
+.add-submit-button {
+    color: white;
+    background-color: black;
+    
+}

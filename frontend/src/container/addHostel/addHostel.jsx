@@ -41,7 +41,7 @@ const AddHostel = () => {
             rules={[
               {
                 required: true,
-                message: "Please input your username!",
+                message: "Please input your place title!",
               },
             ]}
           >
@@ -53,7 +53,7 @@ const AddHostel = () => {
             rules={[
               {
                 required: true,
-                message: "Please input your username!",
+                message: "Please input your place description!",
               },
             ]}
           >
@@ -65,7 +65,7 @@ const AddHostel = () => {
             rules={[
               {
                 required: true,
-                message: "Please input your username!",
+                message: "Please input price!",
               },
             ]}
           >
@@ -77,7 +77,7 @@ const AddHostel = () => {
             rules={[
               {
                 required: true,
-                message: "Please input your username!",
+                message: "Please input your address!",
               },
             ]}
           >
@@ -89,7 +89,7 @@ const AddHostel = () => {
             rules={[
               {
                 required: true,
-                message: "Please input your username!",
+                message: "Please input your phone number!",
               },
             ]}
           >
@@ -116,7 +116,7 @@ const AddHostel = () => {
               span: 16,
             }}
           >
-            <Button type="primary" htmlType="submit">
+            <Button className="add-submit-button" type="primary" htmlType="submit">
               Submit
             </Button>
           </Form.Item>

@@ -2,8 +2,7 @@ import Layout from "../../component/Layout";
 import { Button, Upload, Form, Input } from "antd";
 import "./addHostel.css";
 import axios from "axios";
-import { Radio } from 'antd';
-import { useState } from 'react';
+import { useState } from "react";
 
 const props = {
   name: "file",
@@ -23,6 +22,25 @@ const props = {
   },
 };
 const AddHostel = () => {
+  const [isGirlsHostel, setIsGirlsHostel] = useState(false);
+
+  return (
+    <Layout>
+      <div>
+        <Button
+          onClick={() => {
+            isGirlsHostel ? setIsGirlsHostel(false) : setIsGirlsHostel(true);
+          }}
+        >
+          {isGirlsHostel ? "Change to Boys Hostel" : "Change to Girls Hostel"}
+        </Button>
+      </div>
+      {isGirlsHostel ? <GirlsHostelForm /> : <BoysHostelForm />}
+    </Layout>
+  );
+};
+
+const GirlsHostelForm = () => {
   const onFinish = async (values) => {
     console.log("Success:", values);
 
@@ -34,20 +52,138 @@ const AddHostel = () => {
         description: values.place_descriptioon,
         phone: values.phone,
         address: values.address,
+        catagory: "Girls hostel",
       }
     );
     if (data) {
-     alert("hostel added successfully");
+      alert("hostel added successfully");
     }
   };
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
-  const [value, setValue] = useState(1);
-  const onChange = (e) => {
-    console.log('radio checked', e.target.value);
-    setValue(e.target.value);
+  return (
+    <div className="form_input">
+      <Form
+        name="basic"
+        onFinish={onFinish}
+        onFinishFailed={onFinishFailed}
+        autoComplete="off"
+      >
+        <h3>Girls Hostel</h3>
+        <Form.Item
+          label="Place title"
+          name="place_title"
+          rules={[
+            {
+              required: true,
+              message: "Please input your username!",
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          label="Place Description"
+          name="place_descriptioon"
+          rules={[
+            {
+              required: true,
+              message: "Please input your username!",
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          label="Price per Month"
+          name="price"
+          rules={[
+            {
+              required: true,
+              message: "Please input your username!",
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          label="Address"
+          name="address"
+          rules={[
+            {
+              required: true,
+              message: "Please input your username!",
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          label="Phone"
+          name="phone"
+          rules={[
+            {
+              required: true,
+              message: "Please input your username!",
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          label="Photo"
+          name="image"
+          // rules={[
+          //   {
+          //     required: true,
+          //     message: "Please input your username!",
+          //   },
+          // ]}
+        >
+          <Upload {...props}>
+            <Button>Click to Upload</Button>
+          </Upload>
+        </Form.Item>
+
+        <Form.Item
+          wrapperCol={{
+            offset: 8,
+            span: 16,
+          }}
+        >
+          <Button type="primary" htmlType="submit">
+            Submit
+          </Button>
+        </Form.Item>
+      </Form>
+    </div>
+  );
+};
+
+const BoysHostelForm = () => {
+  const onFinish = async (values) => {
+    console.log("Success:", values);
+
+    const { data } = await axios.post(
+      "http://localhost:8000/api/hostel/add_hostel",
+      {
+        price: values.price,
+        title: values.place_title,
+        description: values.place_descriptioon,
+        phone: values.phone,
+        address: values.address,
+        catagory: "Boys hostel",
+      }
+    );
+    if (data) {
+      alert("hostel added successfully");
+    }
   };
+  const onFinishFailed = (errorInfo) => {
+    console.log("Failed:", errorInfo);
+  };
+
   return (
     <Layout>
       <div className="form_input">
@@ -68,7 +204,7 @@ const AddHostel = () => {
             rules={[
               {
                 required: true,
-                message: "Please input your place title!",
+                message: "Please input your username!",
               },
             ]}
           >
@@ -80,7 +216,7 @@ const AddHostel = () => {
             rules={[
               {
                 required: true,
-                message: "Please input your place description!",
+                message: "Please input your username!",
               },
             ]}
           >
@@ -92,7 +228,7 @@ const AddHostel = () => {
             rules={[
               {
                 required: true,
-                message: "Please input price!",
+                message: "Please input your username!",
               },
             ]}
           >
@@ -104,7 +240,7 @@ const AddHostel = () => {
             rules={[
               {
                 required: true,
-                message: "Please input your address!",
+                message: "Please input your username!",
               },
             ]}
           >
@@ -116,7 +252,7 @@ const AddHostel = () => {
             rules={[
               {
                 required: true,
-                message: "Please input your phone number!",
+                message: "Please input your username!",
               },
             ]}
           >
@@ -143,8 +279,8 @@ const AddHostel = () => {
               span: 16,
             }}
           >
-            <Button className="add-submit-button" type="primary" htmlType="submit">
-              Submit 
+            <Button type="primary" htmlType="submit">
+              Submit
             </Button>
           </Form.Item>
         </Form>
@@ -152,5 +288,4 @@ const AddHostel = () => {
     </Layout>
   );
 };
-
 export default AddHostel;

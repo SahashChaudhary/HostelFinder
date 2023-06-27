@@ -1,21 +1,13 @@
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 const SubNav = () => {
-  const navigate = useNavigate();
   const navDetails = [
-    "Home",
-    "Boys Hostel",
-    "Girls Hostel",
-    "Add Hostel",
-    "Add Location",
+    { title: "Home", link: "/" },
+    { title: "Boys Hostel", link: "/boys-hostel" },
+    { title: "Girls Hostel", link: "/girls-hostel" },
+    { title: "Add Hostel", link: "/add_hostel" },
+    { title: "Add Location", link: "/" },
   ];
 
-  const handleClick = (value) => {
-    if (value === "Add Hostel") {
-      navigate("/add_hostel");
-    } else if (value === "Home") {
-      navigate("/");
-    }
-  };
   return (
     <div>
       <div
@@ -29,17 +21,17 @@ const SubNav = () => {
       >
         {navDetails.map((item, id) => {
           return (
-            <div
-              key={id}
-              style={{
-                border: "1px solid black",
-                padding: "10px",
-                cursor: "pointer",
-              }}
-              onClick={(e) => handleClick(e.target.innerHTML)}
-            >
-              {item}
-            </div>
+            <Link key={id} to={item.link}>
+              <div
+                style={{
+                  border: "1px solid black",
+                  padding: "10px",
+                  cursor: "pointer",
+                }}
+              >
+                {item.title}
+              </div>
+            </Link>
           );
         })}
       </div>

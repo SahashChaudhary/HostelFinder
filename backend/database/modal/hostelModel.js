@@ -9,7 +9,7 @@ const hostelSchema = mongoose.Schema(
     },
     phone: { type: Number },
     address: { type: String, required: true },
- 
+    catagory: { type: String, default: "Boys hostel" },
   },
   { timestamps: true }
 );

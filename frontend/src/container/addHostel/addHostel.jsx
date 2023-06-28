@@ -134,12 +134,12 @@ const GirlsHostelForm = () => {
         <Form.Item
           label="Photo"
           name="image"
-          // rules={[
-          //   {
-          //     required: true,
-          //     message: "Please input your username!",
-          //   },
-          // ]}
+          rules={[
+            {
+              required: true,
+              message: "Please input photo!",
+            },
+          ]}
         >
           <Upload {...props}>
             <Button>Click to Upload</Button>
@@ -152,9 +152,11 @@ const GirlsHostelForm = () => {
             span: 16,
           }}
         >
-          <Button type="primary" htmlType="submit">
-            Submit
-          </Button>
+          <div className="add-hostel-btn">
+            <Button type="primary" htmlType="submit">
+              Submit
+            </Button>
+          </div>
         </Form.Item>
       </Form>
     </div>
@@ -257,12 +259,12 @@ const BoysHostelForm = () => {
         <Form.Item
           label="Photo"
           name="image"
-          // rules={[
-          //   {
-          //     required: true,
-          //     message: "Please input your username!",
-          //   },
-          // ]}
+          rules={[
+            {
+              required: true,
+              message: "Please input photo!",
+            },
+          ]}
         >
           <Upload {...props}>
             <Button>Click to Upload</Button>
@@ -275,9 +277,11 @@ const BoysHostelForm = () => {
             span: 16,
           }}
         >
-          <Button type="primary" htmlType="submit">
-            Submit
-          </Button>
+          <div className="add-hostel-btn">
+            <Button type="primary" htmlType="submit">
+              Submit
+            </Button>
+          </div>
         </Form.Item>
       </Form>
     </div>

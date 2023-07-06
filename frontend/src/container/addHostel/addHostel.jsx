@@ -134,12 +134,7 @@ const GirlsHostelForm = () => {
         <Form.Item
           label="Photo"
           name="image"
-          rules={[
-            {
-              required: true,
-              message: "Please input photo!",
-            },
-          ]}
+        
         >
           <Upload {...props}>
             <Button>Click to Upload</Button>
@@ -259,12 +254,7 @@ const BoysHostelForm = () => {
         <Form.Item
           label="Photo"
           name="image"
-          rules={[
-            {
-              required: true,
-              message: "Please input photo!",
-            },
-          ]}
+         
         >
           <Upload {...props}>
             <Button>Click to Upload</Button>

@@ -54,7 +54,7 @@ exports.getRoomByCatagoryBoysHostel = async (req, res) => {
   try {
     // Find all hostels with the category "Boys hostel"
     const hostels = await hostelModel.find({ catagory: "Boys hostel" });
-    res.status(500).send({
+    res.status(200).send({
       success: true,
       message: "get all hostel by category",
       hostels,
@@ -68,7 +68,7 @@ exports.getRoomByCatagoryGirlsHostel = async (req, res) => {
   try {
     // Find all hostels with the category "Boys hostel"
     const hostels = await hostelModel.find({ catagory: "Girls hostel" });
-    res.status(500).send({
+    res.status(200).send({
       success: true,
       message: "get all hostel by category",
       hostels,

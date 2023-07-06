@@ -1,9 +1,23 @@
 .form_input{
     padding: 20px;
+    padding-top: 20px;
+    padding-right: 100px;
+    padding-left: 100px;
 }
 
-.add-submit-button {
-    color: white;
-    background-color: black;
-    
+.add-hostel-btn{
+    background-color: black; 
+    width: 75px;
+    border-radius: 10px;
+    justify-content: center;
+    vertical-align: middle;
+    margin-right: 450px;
+
+}
+
+.ant-form-item-control-input-content{
+    margin-left: 20px;
+display: flex;
+align-items: center;
+justify-content: center;
 }

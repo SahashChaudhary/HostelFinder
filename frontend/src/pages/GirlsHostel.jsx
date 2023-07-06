@@ -8,8 +8,8 @@ import { useState } from "react";
 const GirlsHostel = () => {
   const [hostel, setHostel] = useState([]);
   const getAllHostel = async () => {
-    const response = await axios.get("http://localhost:8000/api/hostel/hostel");
-    setHostel(response.data.rooms);
+    const response = await axios.get("http://localhost:8000/api/hostel/catagory/girlshostel");
+    setHostel(response.data.hostels);
   };
   useEffect(() => {
     getAllHostel();

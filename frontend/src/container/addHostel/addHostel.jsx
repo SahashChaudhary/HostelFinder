@@ -134,12 +134,7 @@ const GirlsHostelForm = () => {
         <Form.Item
           label="Photo"
           name="image"
-          // rules={[
-          //   {
-          //     required: true,
-          //     message: "Please input your username!",
-          //   },
-          // ]}
+        
         >
           <Upload {...props}>
             <Button>Click to Upload</Button>
@@ -152,9 +147,11 @@ const GirlsHostelForm = () => {
             span: 16,
           }}
         >
-          <Button type="primary" htmlType="submit">
-            Submit
-          </Button>
+          <div className="add-hostel-btn">
+            <Button type="primary" htmlType="submit">
+              Submit
+            </Button>
+          </div>
         </Form.Item>
       </Form>
     </div>
@@ -185,107 +182,102 @@ const BoysHostelForm = () => {
   };
 
   return (
-    <Layout>
-      <div className="form_input">
-        <Form
-          name="basic"
-          onFinish={onFinish}
-          onFinishFailed={onFinishFailed}
-          autoComplete="off"
-        >
-           <Radio.Group onChange={onChange} value={value}>
-      <Radio value={1}>Boys Hostel</Radio>
-      <Radio value={2}>Girls Hostel</Radio>
-      
-    </Radio.Group>
-          <Form.Item
-            label="Place title"
-            name="place_title"
-            rules={[
-              {
-                required: true,
-                message: "Please input your username!",
-              },
-            ]}
-          >
-            <Input />
-          </Form.Item>
-          <Form.Item
-            label="Place Description"
-            name="place_descriptioon"
-            rules={[
-              {
-                required: true,
-                message: "Please input your username!",
-              },
-            ]}
-          >
-            <Input />
-          </Form.Item>
-          <Form.Item
-            label="Price per Month"
-            name="price"
-            rules={[
-              {
-                required: true,
-                message: "Please input your username!",
-              },
-            ]}
-          >
-            <Input />
-          </Form.Item>
-          <Form.Item
-            label="Address"
-            name="address"
-            rules={[
-              {
-                required: true,
-                message: "Please input your username!",
-              },
-            ]}
-          >
-            <Input />
-          </Form.Item>
-          <Form.Item
-            label="Phone"
-            name="phone"
-            rules={[
-              {
-                required: true,
-                message: "Please input your username!",
-              },
-            ]}
-          >
-            <Input />
-          </Form.Item>
-          <Form.Item
-            label="Photo"
-            name="image"
-            // rules={[
-            //   {
-            //     required: true,
-            //     message: "Please input your username!",
-            //   },
-            // ]}
-          >
-            <Upload {...props}>
-              <Button>Click to Upload</Button>
-            </Upload>
-          </Form.Item>
+    <div className="form_input">
+      <Form
+        name="basic"
+        onFinish={onFinish}
+        onFinishFailed={onFinishFailed}
+        autoComplete="off"
+      >
+        <h3>Boys Hostel</h3>
 
-          <Form.Item
-            wrapperCol={{
-              offset: 8,
-              span: 16,
-            }}
-          >
-            <Button type="primary" htmlType="submit">
-              Submit
-            </Button>
-          </Form.Item>
-        </Form>
-      </div>
-    </Layout>
+        <Form.Item
+          label="Place title"
+          name="place_title"
+          rules={[
+            {
+              required: true,
+              message: "Please input your username!",
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          label="Place Description"
+          name="place_descriptioon"
+          rules={[
+            {
+              required: true,
+              message: "Please input your username!",
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          label="Price per Month"
+          name="price"
+          rules={[
+            {
+              required: true,
+              message: "Please input your username!",
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          label="Address"
+          name="address"
+          rules={[
+            {
+              required: true,
+              message: "Please input your username!",
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          label="Phone"
+          name="phone"
+          rules={[
+            {
+              required: true,
+              message: "Please input your username!",
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          label="Photo"
+          name="image"
+          // rules={[
+          //   {
+          //     required: true,
+          //     message: "Please input your username!",
+          //   },
+          // ]}
+        >
+          <Upload {...props}>
+            <Button>Click to Upload</Button>
+          </Upload>
+        </Form.Item>
+
+        <Form.Item
+          wrapperCol={{
+            offset: 8,
+            span: 16,
+          }}
+        >
+          <Button type="primary" htmlType="submit">
+            Submit
+          </Button>
+        </Form.Item>
+      </Form>
+    </div>
   );
 };
 export default AddHostel;

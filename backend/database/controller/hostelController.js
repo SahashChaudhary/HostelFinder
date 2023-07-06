@@ -13,7 +13,7 @@ exports.createRoom = async (req, res) => {
       catagory,
     });
     await newHostel.save();
-    res.status(201).send({
+    res.status(200).send({
       success: true,
       message: "Your Hostel Created",
       result: newHostel,

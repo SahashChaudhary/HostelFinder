@@ -77,7 +77,7 @@ const GirlsHostelForm = () => {
           rules={[
             {
               required: true,
-              message: "Please input your username!",
+              message: "Please input place title!",
             },
           ]}
         >
@@ -89,7 +89,7 @@ const GirlsHostelForm = () => {
           rules={[
             {
               required: true,
-              message: "Please input your username!",
+              message: "Please input place description!",
             },
           ]}
         >
@@ -101,7 +101,7 @@ const GirlsHostelForm = () => {
           rules={[
             {
               required: true,
-              message: "Please input your username!",
+              message: "Please input price per month!",
             },
           ]}
         >
@@ -113,7 +113,7 @@ const GirlsHostelForm = () => {
           rules={[
             {
               required: true,
-              message: "Please input your username!",
+              message: "Please input address!",
             },
           ]}
         >
@@ -125,7 +125,7 @@ const GirlsHostelForm = () => {
           rules={[
             {
               required: true,
-              message: "Please input your username!",
+              message: "Please input phone number!",
             },
           ]}
         >

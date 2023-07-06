@@ -47,3 +47,55 @@ exports.userRegister = async (req, res) => {
     });
   }
 };
+
+//log in controller
+
+exports.userLogin = async (req, res) => {
+  try {
+    const { email, password } = req.body
+    //validation
+    if (!email || !password) {
+      return res.status(404).send({
+        success: false,
+        message: "Invalid email or password"
+      })
+    }
+    const user = await userModel.findOne({ email });
+    if (!user) {
+      return res.status(404).send({
+        success: false,
+        message: "Email is not registerd",
+      });
+    }
+
+    // const match = await comparePassword(password, user.password);
+    if (password !== user.password) {
+      return res.status(200).send({
+        success: false,
+        message: "Invalid Password",
+      });
+    }
+
+    res.send({
+      success: true,
+      message: "login successfull",
+      user: {
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        phone: user.phone,
+        // address: user.address,
+        // role: user.role,
+        // profile: user?.profile
+      },
+
+    })
+
+  } catch (error) {
+    console.log(error)
+    res.status(500).send({
+      success: false,
+      message: "login failed"
+    })
+  }
+}

@@ -1,5 +1,5 @@
 import Layout from "../../component/Layout";
-import { Button, Upload, Form, Input } from "antd";
+import { Button, Upload, Form, Input, InputNumber } from "antd";
 import "./addHostel.css";
 import axios from "axios";
 import { useState } from "react";
@@ -131,11 +131,7 @@ const GirlsHostelForm = () => {
         >
           <Input />
         </Form.Item>
-        <Form.Item
-          label="Photo"
-          name="image"
-        
-        >
+        <Form.Item label="Photo" name="image">
           <Upload {...props}>
             <Button>Click to Upload</Button>
           </Upload>
@@ -221,11 +217,11 @@ const BoysHostelForm = () => {
           rules={[
             {
               required: true,
-              message: "Please input your username!",
+              message: "invalid Price",
             },
           ]}
         >
-          <Input />
+          <Input type="number" />
         </Form.Item>
         <Form.Item
           label="Address"
@@ -249,13 +245,9 @@ const BoysHostelForm = () => {
             },
           ]}
         >
-          <Input />
+          <Input type="number" />
         </Form.Item>
-        <Form.Item
-          label="Photo"
-          name="image"
-         
-        >
+        <Form.Item label="Photo" name="image">
           <Upload {...props}>
             <Button>Click to Upload</Button>
           </Upload>

@@ -7,6 +7,7 @@ const hostelSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    img_collection: [Object],
     phone: { type: Number },
     address: { type: String, required: true },
     catagory: { type: String, default: "Boys hostel" },

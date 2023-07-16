@@ -27,6 +27,17 @@ const SubNav = () => {
                   border: "1px solid black",
                   padding: "10px",
                   cursor: "pointer",
+                  backgroundColor: "lightblue",
+                  color: "black",
+                  borderRadius: "5px",
+                  boxShadow: "0 2px 4px rgba(0, 0, 0, 0.2)",
+                  transition: "background-color 0.3s ease",
+                }}
+                onMouseEnter={(e) => {
+                  e.target.style.transform = "scale(1.1)";
+                }}
+                onMouseLeave={(e) => {
+                  e.target.style.transform = "scale(1)";
                 }}
               >
                 {item.title}

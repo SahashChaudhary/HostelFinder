@@ -10,3 +10,11 @@
   scroll-behavior: smooth;
   color-scheme: #f5f5f5;
 }
+
+.btn {
+  @apply bg-[lightblue] hover:bg-blue-600 py-3 px-6 text-slate-50 rounded-lg w-auto transition;
+}
+
+.btn:active {
+  @apply scale-95;
+}

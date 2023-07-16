@@ -11,11 +11,12 @@ const AddHostel = () => {
 
   return (
     <Layout>
-      <div>
-        <Button
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '10vh'}}>
+        <Button 
           onClick={() => {
             isGirlsHostel ? setIsGirlsHostel(false) : setIsGirlsHostel(true);
           }}
+          style={{ backgroundColor: 'red', color: 'white' }}
         >
           {isGirlsHostel ? "Change to Boys Hostel" : "Change to Girls Hostel"}
         </Button>

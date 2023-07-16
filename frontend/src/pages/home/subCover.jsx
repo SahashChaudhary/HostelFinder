@@ -6,11 +6,11 @@ export default function SubCover() {
   const data = [
     {
       icon: <FaBed />,
-      value: "1K+ Beds",
+      value: "500+ Beds",
     },
     {
       icon: <AiFillHome />,
-      value: "50+ Hostels",
+      value: "25+ Hostels",
     },
     {
       icon: <PiStudentBold />,

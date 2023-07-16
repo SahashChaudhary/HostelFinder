@@ -1,8 +1,8 @@
 import Layout from "../component/Layout";
-import Homecard from "../card/homecard";
 import axios from "axios";
 import { useEffect } from "react";
 import { useState } from "react";
+import LongCard from "../card/longCard";
 
 const GirlsHostel = () => {
   const [hostel, setHostel] = useState([]);
@@ -22,11 +22,7 @@ const GirlsHostel = () => {
         {hostel.map((item) => {
           return (
             <div key={item._id}>
-              <Homecard
-                title={item.title}
-                price={item.price}
-                description={item.description}
-              />
+              <LongCard item={item} />
             </div>
           );
         })}

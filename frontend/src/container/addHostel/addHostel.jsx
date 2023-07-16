@@ -1,26 +1,11 @@
 import Layout from "../../component/Layout";
-import { Button, Upload, Form, Input, InputNumber } from "antd";
+import { Button, Upload, Form, Input } from "antd";
 import "./addHostel.css";
 import axios from "axios";
 import { useState } from "react";
 
-const props = {
-  name: "file",
-  action: "https://www.mocky.io/v2/5cc8019d300000980a055e76",
-  headers: {
-    authorization: "authorization-text",
-  },
-  onChange(info) {
-    if (info.file.status !== "uploading") {
-      console.log(info.file, info.fileList);
-    }
-    if (info.file.status === "done") {
-      // message.success(`${info.file.name} file uploaded successfully`);
-    } else if (info.file.status === "error") {
-      // message.error(`${info.file.name} file upload failed.`);
-    }
-  },
-};
+const { TextArea } = Input;
+
 const AddHostel = () => {
   const [isGirlsHostel, setIsGirlsHostel] = useState(false);
 
@@ -62,6 +47,12 @@ const GirlsHostelForm = () => {
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
+  const normFile = (e) => {
+    if (Array.isArray(e)) {
+      return e;
+    }
+    return e?.fileList;
+  };
   return (
     <div className="form_input">
       <Form
@@ -89,11 +80,10 @@ const GirlsHostelForm = () => {
           rules={[
             {
               required: true,
-              message: "Please input your username!",
             },
           ]}
         >
-          <Input />
+          <TextArea rows={4} />
         </Form.Item>
         <Form.Item
           label="Price per Month"
@@ -131,23 +121,22 @@ const GirlsHostelForm = () => {
         >
           <Input />
         </Form.Item>
-        <Form.Item label="Photo" name="image">
-          <Upload {...props}>
-            <Button>Click to Upload</Button>
+        <Form.Item
+          label="Upload"
+          valuePropName="fileList"
+          getValueFromEvent={normFile}
+        >
+          <Upload action="/upload.do" listType="picture-card">
+            <div>
+              <div>Upload</div>
+            </div>
           </Upload>
         </Form.Item>
 
-        <Form.Item
-          wrapperCol={{
-            offset: 8,
-            span: 16,
-          }}
-        >
-          <div className="add-hostel-btn">
-            <Button type="primary" htmlType="submit">
-              Submit
-            </Button>
-          </div>
+        <Form.Item>
+          <Button type="primary" htmlType="submit">
+            Submit
+          </Button>
         </Form.Item>
       </Form>
     </div>
@@ -158,23 +147,29 @@ const BoysHostelForm = () => {
   const onFinish = async (values) => {
     console.log("Success:", values);
 
-    const { data } = await axios.post(
-      "http://localhost:8000/api/hostel/add_hostel",
-      {
-        price: values.price,
-        title: values.place_title,
-        description: values.place_descriptioon,
-        phone: values.phone,
-        address: values.address,
-        catagory: "Boys hostel",
-      }
-    );
-    if (data) {
-      alert("hostel added successfully");
-    }
+    // const { data } = await axios.post(
+    //   "http://localhost:8000/api/hostel/add_hostel",
+    //   {
+    //     price: values.price,
+    //     title: values.place_title,
+    //     description: values.place_descriptioon,
+    //     phone: values.phone,
+    //     address: values.address,
+    //     catagory: "Boys hostel",
+    //   }
+    // );
+    // if (data) {
+    //   alert("hostel added successfully");
+    // }
   };
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
+  };
+  const normFile = (e) => {
+    if (Array.isArray(e)) {
+      return e;
+    }
+    return e?.fileList;
   };
 
   return (
@@ -209,7 +204,7 @@ const BoysHostelForm = () => {
             },
           ]}
         >
-          <Input />
+          <TextArea rows={4} />
         </Form.Item>
         <Form.Item
           label="Price per Month"
@@ -247,23 +242,29 @@ const BoysHostelForm = () => {
         >
           <Input type="number" />
         </Form.Item>
-        <Form.Item label="Photo" name="image">
-          <Upload {...props}>
-            <Button>Click to Upload</Button>
+        <Form.Item
+          label="Upload"
+          name="image"
+          valuePropName="fileList"
+          getValueFromEvent={normFile}
+        >
+          <Upload action="/upload.do" listType="picture-card">
+            <div>
+              <div
+                style={{
+                  marginTop: 8,
+                }}
+              >
+                Upload
+              </div>
+            </div>
           </Upload>
         </Form.Item>
 
-        <Form.Item
-          wrapperCol={{
-            offset: 8,
-            span: 16,
-          }}
-        >
-          <div className="add-hostel-btn">
-            <Button type="primary" htmlType="submit">
-              Submit
-            </Button>
-          </div>
+        <Form.Item>
+          <Button type="primary" htmlType="submit">
+            Submit
+          </Button>
         </Form.Item>
       </Form>
     </div>

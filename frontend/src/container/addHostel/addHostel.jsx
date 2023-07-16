@@ -188,7 +188,6 @@ const BoysHostelForm = () => {
           rules={[
             {
               required: true,
-              message: "Please input your username!",
             },
           ]}
         >
@@ -200,7 +199,6 @@ const BoysHostelForm = () => {
           rules={[
             {
               required: true,
-              message: "Please input your username!",
             },
           ]}
         >
@@ -224,7 +222,6 @@ const BoysHostelForm = () => {
           rules={[
             {
               required: true,
-              message: "Please input your username!",
             },
           ]}
         >
@@ -236,7 +233,6 @@ const BoysHostelForm = () => {
           rules={[
             {
               required: true,
-              message: "Please input your username!",
             },
           ]}
         >

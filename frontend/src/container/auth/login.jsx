@@ -1,5 +1,5 @@
 import { Button, Checkbox, Form, Input, message } from "antd";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Layout from "../../component/Layout";
 import "./login.css";
 import axios from "axios";
@@ -8,7 +8,7 @@ import axios from "axios";
 
 const Login = () => {
   const [messageApi, contextHolder] = message.useMessage();
-
+const navigate = useNavigate()
   const onFinish = async (values) => {
     console.log(values);
     const response = await axios.post("http://localhost:8000/api/auth/login", {
@@ -17,12 +17,12 @@ const Login = () => {
     });
 
     if (response.data) {
-      alert(response.data.message);
       localStorage.setItem("userRole", "user");
       messageApi.open({
         type: "success",
         content: "This is a success message",
       });
+      navigate('/')
     }
   };
   const onFinishFailed = (errorInfo) => {

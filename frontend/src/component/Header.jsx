@@ -28,7 +28,9 @@ const Header = () => {
                 <button className="nav-button">Login</button>
               </Link>
             )}
-            <button className="nav-button">Logout</button>
+            <button className="nav-button" onClick={() => localStorage.clear()}>
+              Logout
+            </button>
           </Toolbar>
         </AppBar>
       </Box>

@@ -8,6 +8,8 @@
 
 .register-title {
   margin: 30px;
+  justify-content:center ;
+  display: flex;
 }
 
 .register-button {

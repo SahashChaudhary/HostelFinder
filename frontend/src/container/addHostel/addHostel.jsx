@@ -8,15 +8,21 @@ const { TextArea } = Input;
 
 const AddHostel = () => {
   const [isGirlsHostel, setIsGirlsHostel] = useState(false);
-
   return (
     <Layout>
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '10vh'}}>
-        <Button 
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "10vh",
+        }}
+      >
+        <Button
           onClick={() => {
             isGirlsHostel ? setIsGirlsHostel(false) : setIsGirlsHostel(true);
           }}
-          style={{ backgroundColor: 'red', color: 'white' }}
+          style={{ backgroundColor: "red", color: "white" }}
         >
           {isGirlsHostel ? "Change to Boys Hostel" : "Change to Girls Hostel"}
         </Button>
@@ -27,18 +33,33 @@ const AddHostel = () => {
 };
 
 const GirlsHostelForm = () => {
-  const onFinish = async (values) => {
-    console.log("Success:", values);
+  const [images, setImages] = useState([]);
 
+  const onFinish = async (values) => {
+    const hostel = {
+      // lng: location.lng,
+      // lat: location.lat,
+
+      price: values.price,
+      title: values.place_title,
+      description: values.place_descriptioon,
+      phone: values.phone,
+      address: values.address,
+      catagory: "Girls hostel",
+    };
+
+    const bodyFormData = new FormData();
+    Object.keys(hostel).map((item) => {
+      bodyFormData.append(item, hostel[item]);
+    });
+    for (let i = 0; i < images.length; i++) {
+      bodyFormData.append("photos", images[i]);
+    }
     const { data } = await axios.post(
       "http://localhost:8000/api/hostel/add_hostel",
+      bodyFormData,
       {
-        price: values.price,
-        title: values.place_title,
-        description: values.place_descriptioon,
-        phone: values.phone,
-        address: values.address,
-        catagory: "Girls hostel",
+        headers: { "Content-Type": "multipart/form-data" },
       }
     );
     if (data) {
@@ -48,12 +69,12 @@ const GirlsHostelForm = () => {
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
-  const normFile = (e) => {
-    if (Array.isArray(e)) {
-      return e;
-    }
-    return e?.fileList;
-  };
+  // const normFile = (e) => {
+  //   if (Array.isArray(e)) {
+  //     return e;
+  //   }
+  //   return e?.fileList;
+  // };
   return (
     <div className="form_input">
       <Form
@@ -122,17 +143,11 @@ const GirlsHostelForm = () => {
         >
           <Input />
         </Form.Item>
-        <Form.Item
-          label="Upload"
-          valuePropName="fileList"
-          getValueFromEvent={normFile}
-        >
-          <Upload action="/upload.do" listType="picture-card">
-            <div>
-              <div>Upload</div>
-            </div>
-          </Upload>
-        </Form.Item>
+        <input
+          type="file"
+          onChange={(e) => setImages(e.target.files)}
+          multiple
+        />
 
         <Form.Item>
           <Button type="primary" htmlType="submit">

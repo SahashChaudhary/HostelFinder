@@ -3,6 +3,8 @@ import { Button, Upload, Form, Input } from "antd";
 import "./addHostel.css";
 import axios from "axios";
 import { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const { TextArea } = Input;
 
@@ -28,6 +30,7 @@ const AddHostel = () => {
         </Button>
       </div>
       {isGirlsHostel ? <GirlsHostelForm /> : <BoysHostelForm />}
+      <ToastContainer />
     </Layout>
   );
 };
@@ -37,9 +40,6 @@ const GirlsHostelForm = () => {
 
   const onFinish = async (values) => {
     const hostel = {
-      // lng: location.lng,
-      // lat: location.lat,
-
       price: values.price,
       title: values.place_title,
       description: values.place_descriptioon,
@@ -63,20 +63,17 @@ const GirlsHostelForm = () => {
       }
     );
     if (data) {
-      alert("hostel added successfully");
+      toast.success("hostel added successfully");
     }
   };
+
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
-  // const normFile = (e) => {
-  //   if (Array.isArray(e)) {
-  //     return e;
-  //   }
-  //   return e?.fileList;
-  // };
+
   return (
     <div className="form_input">
+      <ToastContainer />
       <Form
         name="basic"
         onFinish={onFinish}
@@ -90,7 +87,7 @@ const GirlsHostelForm = () => {
           rules={[
             {
               required: true,
-              message: "Please input your username!",
+              message: "Please input the place title!",
             },
           ]}
         >
@@ -102,6 +99,7 @@ const GirlsHostelForm = () => {
           rules={[
             {
               required: true,
+              message: "Please input the place description!",
             },
           ]}
         >
@@ -113,7 +111,7 @@ const GirlsHostelForm = () => {
           rules={[
             {
               required: true,
-              message: "Please input your username!",
+              message: "Please input the price!",
             },
           ]}
         >
@@ -125,7 +123,7 @@ const GirlsHostelForm = () => {
           rules={[
             {
               required: true,
-              message: "Please input your username!",
+              message: "Please input the address!",
             },
           ]}
         >
@@ -137,7 +135,7 @@ const GirlsHostelForm = () => {
           rules={[
             {
               required: true,
-              message: "Please input your username!",
+              message: "Please input the phone number!",
             },
           ]}
         >
@@ -160,32 +158,39 @@ const GirlsHostelForm = () => {
 };
 
 const BoysHostelForm = () => {
-  const onFinish = async (values) => {
-    console.log("Success:", values);
+  const [images, setImages] = useState([]);
 
-    // const { data } = await axios.post(
-    //   "http://localhost:8000/api/hostel/add_hostel",
-    //   {
-    //     price: values.price,
-    //     title: values.place_title,
-    //     description: values.place_descriptioon,
-    //     phone: values.phone,
-    //     address: values.address,
-    //     catagory: "Boys hostel",
-    //   }
-    // );
-    // if (data) {
-    //   alert("hostel added successfully");
-    // }
+  const onFinish = async (values) => {
+    const hostel = {
+      price: values.price,
+      title: values.place_title,
+      description: values.place_descriptioon,
+      phone: values.phone,
+      address: values.address,
+      catagory: "Boys hostel",
+    };
+
+    const bodyFormData = new FormData();
+    Object.keys(hostel).map((item) => {
+      bodyFormData.append(item, hostel[item]);
+    });
+    for (let i = 0; i < images.length; i++) {
+      bodyFormData.append("photos", images[i]);
+    }
+    const { data } = await axios.post(
+      "http://localhost:8000/api/hostel/add_hostel",
+      bodyFormData,
+      {
+        headers: { "Content-Type": "multipart/form-data" },
+      }
+    );
+    if (data) {
+      toast.success("hostel added successfully");
+    }
   };
+
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
-  };
-  const normFile = (e) => {
-    if (Array.isArray(e)) {
-      return e;
-    }
-    return e?.fileList;
   };
 
   return (
@@ -197,13 +202,13 @@ const BoysHostelForm = () => {
         autoComplete="off"
       >
         <h3>Boys Hostel</h3>
-
         <Form.Item
           label="Place title"
           name="place_title"
           rules={[
             {
               required: true,
+              message: "Please input the place title!",
             },
           ]}
         >
@@ -215,6 +220,7 @@ const BoysHostelForm = () => {
           rules={[
             {
               required: true,
+              message: "Please input the place description!",
             },
           ]}
         >
@@ -226,7 +232,7 @@ const BoysHostelForm = () => {
           rules={[
             {
               required: true,
-              message: "invalid Price",
+              message: "Please input the price!",
             },
           ]}
         >
@@ -238,6 +244,7 @@ const BoysHostelForm = () => {
           rules={[
             {
               required: true,
+              message: "Please input the address!",
             },
           ]}
         >
@@ -249,29 +256,17 @@ const BoysHostelForm = () => {
           rules={[
             {
               required: true,
+              message: "Please input the phone number!",
             },
           ]}
         >
           <Input type="number" />
         </Form.Item>
-        <Form.Item
-          label="Upload"
-          name="image"
-          valuePropName="fileList"
-          getValueFromEvent={normFile}
-        >
-          <Upload action="/upload.do" listType="picture-card">
-            <div>
-              <div
-                style={{
-                  marginTop: 8,
-                }}
-              >
-                Upload
-              </div>
-            </div>
-          </Upload>
-        </Form.Item>
+        <input
+          type="file"
+          onChange={(e) => setImages(e.target.files)}
+          multiple
+        />
 
         <Form.Item>
           <Button type="primary" htmlType="submit">
@@ -282,4 +277,5 @@ const BoysHostelForm = () => {
     </div>
   );
 };
+
 export default AddHostel;

@@ -71,7 +71,6 @@ const GirlsHostelForm = () => {
 
   return (
     <div className="form_input">
-      <ToastContainer />
       <Form
         name="basic"
         onFinish={onFinish}

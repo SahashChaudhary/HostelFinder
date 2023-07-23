@@ -83,3 +83,21 @@ exports.getRoomByCatagoryGirlsHostel = async (req, res) => {
     console.error("Error retrieving hostels:", error);
   }
 };
+
+//get single room
+exports.getSingleHostel = async (req, res) => {
+  try {
+    const hostel = await hostelModel.findById(req.params.rid);
+    res.status(200).send({
+      success: true,
+      message: "get room success",
+      hostel,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: "Failed to get room",
+    });
+  }
+};

@@ -4,6 +4,7 @@ const {
   getRoom,
   getRoomByCatagoryBoysHostel,
   getRoomByCatagoryGirlsHostel,
+  getSingleHostel,
 } = require("../controller/hostelController");
 const router = express.Router();
 const multer = require("multer");
@@ -26,5 +27,6 @@ router.post("/add_hostel", upload.array("photos", 12), createRoom);
 router.get("/hostel", getRoom);
 router.get("/catagory/boyshostel", getRoomByCatagoryBoysHostel);
 router.get("/catagory/girlshostel", getRoomByCatagoryGirlsHostel);
+router.get("/hostel/:rid", getSingleHostel);
 
 module.exports = router;

@@ -5,9 +5,10 @@ import GirlsHostel from "../pages/GirlsHostel";
 import Register from "../container/auth/register";
 import Login from "../container/auth/login";
 import AddHostel from "../container/addHostel/addHostel";
+import { useSelector } from "react-redux";
 
 const ConditionalRoutes = () => {
-  let userRole = localStorage.getItem("userRole");
+  const { userRole } = useSelector((state) => state.user);
   if (userRole === "user") {
     return <UserRoutes />;
   } else {

@@ -1,4 +1,6 @@
+const { hashPassword, comparePassword } = require("../helper/useHelper");
 const userModel = require("../modal/userModal");
+const JWT = require("jsonwebtoken");
 
 exports.userRegister = async (req, res) => {
   try {
@@ -25,13 +27,13 @@ exports.userRegister = async (req, res) => {
         message: "Already user",
       });
     }
-    // const hashedPassword = await hashPassword(password)
+    const hashedPassword = await hashPassword(password);
 
     let user = await new userModel({
       name,
       email,
       phone,
-      password,
+      password: hashedPassword,
     }).save();
 
     res.status(200).send({
@@ -52,33 +54,46 @@ exports.userRegister = async (req, res) => {
 
 exports.userLogin = async (req, res) => {
   try {
-    const { email, password } = req.body
+    const { email, password } = req.body;
     //validation
     if (!email || !password) {
-      return res.status(404).send({
+      return res.status(200).send({
         success: false,
-        message: "Invalid email or password"
-      })
+        message: "Invalid email or password",
+      });
     }
     const user = await userModel.findOne({ email });
     if (!user) {
-      return res.status(404).send({
+      return res.status(200).send({
         success: false,
         message: "Email is not registerd",
       });
     }
 
-    // const match = await comparePassword(password, user.password);
-    if (password !== user.password) {
+    const match = await comparePassword(password, user.password);
+    if (!match) {
       return res.status(200).send({
         success: false,
         message: "Invalid Password",
       });
     }
-
-    res.send({
+    //token
+    const token = await JWT.sign(
+      {
+        // _id: user._id,
+        // name: user.name,
+        // uPhoto: user.profile,
+        // uEmail: user.email,
+        // uPhone: user.phone,
+      },
+      process.env.SECRETE_KEY,
+      {
+        expiresIn: "7d",
+      }
+    );
+    res.status(200).send({
       success: true,
-      message: "login successfull",
+      message: "login successfully",
       user: {
         _id: user._id,
         name: user.name,
@@ -88,14 +103,13 @@ exports.userLogin = async (req, res) => {
         // role: user.role,
         // profile: user?.profile
       },
-
-    })
-
+      token,
+    });
   } catch (error) {
-    console.log(error)
+    console.log(error);
     res.status(500).send({
       success: false,
-      message: "login failed"
-    })
+      message: "login failed",
+    });
   }
-}
+};

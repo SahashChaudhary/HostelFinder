@@ -1,28 +1,38 @@
-import { Button, Checkbox, Form, Input, message } from "antd";
+import { Button, Checkbox, Form, Input } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import Layout from "../../component/Layout";
 import "./login.css";
 import axios from "axios";
-
-// const values = { remember: true, email: 'suraj@gmail.com', password: 'hello' }
+import { useDispatch } from "react-redux";
+import {
+  assignUserRole,
+  setLoginDetails,
+} from "../../redux/reducers/userSlice";
+import { toast } from "react-toastify";
 
 const Login = () => {
-  const [messageApi, contextHolder] = message.useMessage();
-const navigate = useNavigate()
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const onFinish = async (values) => {
-    console.log(values);
-    const response = await axios.post("http://localhost:8000/api/auth/login", {
+    const { data } = await axios.post("http://localhost:8000/api/auth/login", {
       email: values.email,
       password: values.password,
     });
-
-    if (response.data) {
+    if (data.success) {
       localStorage.setItem("userRole", "user");
-      messageApi.open({
-        type: "success",
-        content: "This is a success message",
-      });
-      navigate('/')
+      dispatch(assignUserRole("user"));
+      dispatch(
+        setLoginDetails({
+          id: data.user._id,
+          username: data.user.name,
+          token: data.token,
+          profile: data?.user?.profile,
+        })
+      );
+      toast.success(data.message);
+      navigate("/");
+    } else {
+      toast.success(data.message);
     }
   };
   const onFinishFailed = (errorInfo) => {
@@ -30,7 +40,6 @@ const navigate = useNavigate()
   };
   return (
     <div>
-      {contextHolder}
       <Layout>
         <div>
           <h1 className="login-title">Login to your account</h1>

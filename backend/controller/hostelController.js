@@ -2,7 +2,6 @@ const hostelModel = require("../modal/hostelModel");
 
 exports.createRoom = async (req, res) => {
   try {
-
     const reqFiles = [];
     const url = req.protocol + "://" + req.get("host");
     for (let i = 0; i < req.files.length; i++) {
@@ -17,7 +16,7 @@ exports.createRoom = async (req, res) => {
       address,
       description,
       catagory,
-      img_collection: reqFiles
+      img_collection: reqFiles,
     });
     await newHostel.save();
     res.status(201).send({

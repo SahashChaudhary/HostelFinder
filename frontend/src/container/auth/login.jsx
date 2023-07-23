@@ -19,6 +19,9 @@ const Login = () => {
       password: values.password,
     });
     if (data.success) {
+      const { token } = data;
+      // Set the authorization header for subsequent requests
+      axios.defaults.headers.common["Authorization"] = token;
       localStorage.setItem("userRole", "user");
       dispatch(assignUserRole("user"));
       dispatch(

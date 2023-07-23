@@ -5,16 +5,11 @@ import SubNav from "./subNav";
 const Layout = ({ children }) => {
   return (
     <>
-      <div
-        style={{
-          // position: "fixed",
-          width: "100vw",
-        }}
-      >
+      <div>
         <Header />
         <SubNav />
       </div>
-      <main style={{ minHeight: "80vh"}}>{children}</main>
+      <main style={{ minHeight: "80vh" }}>{children}</main>
       <Footer />
     </>
   );

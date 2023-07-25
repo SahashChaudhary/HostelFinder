@@ -1,8 +1,10 @@
 import { Avatar } from "@mui/material";
 import styles from "./style.module.css";
 import PropTypes from "prop-types";
+import { useNavigate } from "react-router-dom";
 
 export default function LongCard({ item }) {
+  const navigate = useNavigate();
   return (
     <div className={styles.long_card_container}>
       <div className={styles.image}>
@@ -27,7 +29,14 @@ export default function LongCard({ item }) {
             <p className={styles.label}>Address:</p>
             <p className={styles.value}>{item.address}</p>
           </div>
-          <button className="btn mt-8">See more details</button>
+          <button
+            className="btn mt-8"
+            onClick={() => {
+              navigate(`/hostel/${item.title}`, { state: item._id });
+            }}
+          >
+            See more details
+          </button>
         </div>
       </div>
     </div>

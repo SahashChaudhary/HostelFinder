@@ -1,10 +1,13 @@
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 const SubNav = () => {
+  const { isLoggedIn } = useSelector((state) => state.user);
+
   const navDetails = [
     { title: "Home", link: "/" },
     { title: "Boys Hostel", link: "/boys-hostel" },
     { title: "Girls Hostel", link: "/girls-hostel" },
-    { title: "Add Hostel", link: "/add_hostel" },
+    { title: "Add Hostel", link: isLoggedIn ? "/add_hostel" : "/login" },
     { title: "Add Location", link: "/" },
   ];
 

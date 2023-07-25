@@ -5,9 +5,11 @@ import GirlsHostel from "../pages/GirlsHostel";
 import Register from "../container/auth/register";
 import Login from "../container/auth/login";
 import AddHostel from "../container/addHostel/addHostel";
+import { useSelector } from "react-redux";
+import RespectiveHostel from "../pages/respectiveHostel/respectiveHostel";
 
 const ConditionalRoutes = () => {
-  let userRole = localStorage.getItem("userRole");
+  const { userRole } = useSelector((state) => state.user);
   if (userRole === "user") {
     return <UserRoutes />;
   } else {
@@ -21,9 +23,9 @@ const DefaulRoutes = () => {
 
       <Route path="/boys-hostel" element={<BoysHostel />} />
       <Route path="/girls-hostel" element={<GirlsHostel />} />
-
       <Route path="/register" element={<Register />} />
       <Route path="/login" element={<Login />} />
+      <Route path="/hostel/:name" element={<RespectiveHostel />} />
     </Routes>
   );
 };
@@ -34,6 +36,7 @@ const UserRoutes = () => {
       <Route path="/boys-hostel" element={<BoysHostel />} />
       <Route path="/girls-hostel" element={<GirlsHostel />} />
       <Route path="/add_hostel" element={<AddHostel />} />
+      <Route path="/hostel/:name" element={<RespectiveHostel />} />
     </Routes>
   );
 };

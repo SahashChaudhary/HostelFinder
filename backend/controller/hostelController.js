@@ -2,7 +2,6 @@ const hostelModel = require("../modal/hostelModel");
 
 exports.createRoom = async (req, res) => {
   try {
-
     const reqFiles = [];
     const url = req.protocol + "://" + req.get("host");
     for (let i = 0; i < req.files.length; i++) {
@@ -17,7 +16,7 @@ exports.createRoom = async (req, res) => {
       address,
       description,
       catagory,
-      img_collection: reqFiles
+      img_collection: reqFiles,
     });
     await newHostel.save();
     res.status(200).send({
@@ -82,5 +81,23 @@ exports.getRoomByCatagoryGirlsHostel = async (req, res) => {
     });
   } catch (error) {
     console.error("Error retrieving hostels:", error);
+  }
+};
+
+//get single room
+exports.getSingleHostel = async (req, res) => {
+  try {
+    const hostel = await hostelModel.findById(req.params.rid);
+    res.status(200).send({
+      success: true,
+      message: "get room success",
+      hostel,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: "Failed to get room",
+    });
   }
 };

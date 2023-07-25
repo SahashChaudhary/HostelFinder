@@ -22,7 +22,7 @@ const Homepage = () => {
     <Layout>
       <CoverImage />
       <SubCover />
-      <div className="flex justify-center item-center gap-[10px] flex-wrap mt-[10px] p-[20px]">
+      <div className="flex justify-center item-start gap-[10px] flex-wrap mt-[10px] p-[20px]">
         {hostel.map((item, id) => {
           return (
             <div key={item._id}>

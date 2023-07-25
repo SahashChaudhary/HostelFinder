@@ -1,0 +1,65 @@
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+
+  /* Center slide text vertically */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.swiper-wrapper {
+  height: 250px !important;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #808080;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.respective_hostel_title {
+  margin-top: 25px;
+  font-size: 2em;
+  font-weight: bold;
+  font-family: adobe-garamond-pro;
+  font-weight: 700;
+  line-height: 1.3em;
+}
+.respective_hostel_address {
+  font-weight: 600;
+  font-size: 15px;
+}
+.resp_title_price {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.res_hostel_title {
+  font-family: adobe-garamond-pro, sans-serif;
+  font-weight: bolder;
+  margin-bottom: 15px;
+  font-size: 24px;
+  border-bottom: 1px solid #808080;
+  text-align: start;
+}
+.res_title_features {
+  height: 26px;
+  min-width: 100px;
+  padding: 5px;
+  border-radius: 20px;
+  background: #34a85326;
+  text-align: center;
+  color: #34a853;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

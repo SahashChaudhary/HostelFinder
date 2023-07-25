@@ -7,6 +7,10 @@
 }
 
 .login-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
   margin: 30px;
 }
 
@@ -16,3 +20,31 @@
   align-items: center;
   background-color: black;
 }
+.login-font-bold {
+  font-weight: bold;
+  color:rgb(22, 209, 212);
+}
+
+/* .login-title {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 24px;
+}
+
+.logindetail {
+  display: flex;
+  justify-content: center;
+}
+
+.login-button {
+  width: 100%;
+}
+
+.login-text-noacc {
+  text-align: center;
+  margin-top: 16px;
+}
+
+.login-font-bold {
+  font-weight: bold;
+} */

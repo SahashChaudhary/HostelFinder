@@ -1,128 +1,306 @@
 import Layout from "../../component/Layout";
-import { Button, Upload, Form, Input } from "antd";
+import { Button, Upload, Form, Input, Select } from "antd";
 import "./addHostel.css";
+import axios from "axios";
+import { useState } from "react";
+import { toast } from "react-toastify";
 
-const props = {
-  name: "file",
-  action: "https://www.mocky.io/v2/5cc8019d300000980a055e76",
-  headers: {
-    authorization: "authorization-text",
+const { TextArea } = Input;
+const options = [
+  {
+    value: "24 hours electricity",
   },
-  onChange(info) {
-    if (info.file.status !== "uploading") {
-      console.log(info.file, info.fileList);
-    }
-    if (info.file.status === "done") {
-      message.success(`${info.file.name} file uploaded successfully`);
-    } else if (info.file.status === "error") {
-      message.error(`${info.file.name} file upload failed.`);
-    }
+  {
+    value: "Hot and Cold water",
   },
-};
+  {
+    value: "Loundary",
+  },
+  {
+    value: "Wifi",
+  },
+];
 const AddHostel = () => {
-  const onFinish = (values) => {
-    console.log("Success:", values);
+  const [isGirlsHostel, setIsGirlsHostel] = useState(false);
+  return (
+    <Layout>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "10vh",
+        }}
+      >
+        <Button
+          onClick={() => {
+            isGirlsHostel ? setIsGirlsHostel(false) : setIsGirlsHostel(true);
+          }}
+          style={{ backgroundColor: "red", color: "white" }}
+        >
+          {isGirlsHostel ? "Change to Boys Hostel" : "Change to Girls Hostel"}
+        </Button>
+      </div>
+      {isGirlsHostel ? <GirlsHostelForm /> : <BoysHostelForm />}
+    </Layout>
+  );
+};
+
+const GirlsHostelForm = () => {
+  const [images, setImages] = useState([]);
+
+  const onFinish = async (values) => {
+    const hostel = {
+      price: values.price,
+      title: values.place_title,
+      description: values.place_descriptioon,
+      phone: values.phone,
+      address: values.address,
+      features: values.features,
+      catagory: "Girls hostel",
+    };
+
+    const bodyFormData = new FormData();
+    Object.keys(hostel).map((item) => {
+      bodyFormData.append(item, hostel[item]);
+    });
+    for (let i = 0; i < images.length; i++) {
+      bodyFormData.append("photos", images[i]);
+    }
+    const { data } = await axios.post(
+      "http://localhost:8000/api/hostel/add_hostel",
+      bodyFormData,
+      {
+        headers: { "Content-Type": "multipart/form-data" },
+      }
+    );
+    if (data) {
+      toast.success("hostel added successfully");
+    }
   };
+
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
-  return (
-    <Layout>
-      <div className="form_input">
-        <Form
-          name="basic"
-          onFinish={onFinish}
-          onFinishFailed={onFinishFailed}
-          autoComplete="off"
-        >
-          <Form.Item
-            label="Place title"
-            name="place_title"
-            rules={[
-              {
-                required: true,
-                message: "Please input your place title!",
-              },
-            ]}
-          >
-            <Input />
-          </Form.Item>
-          <Form.Item
-            label="Place Description"
-            name="place_descriptioon"
-            rules={[
-              {
-                required: true,
-                message: "Please input your place description!",
-              },
-            ]}
-          >
-            <Input />
-          </Form.Item>
-          <Form.Item
-            label="Price per Month"
-            name="price"
-            rules={[
-              {
-                required: true,
-                message: "Please input price!",
-              },
-            ]}
-          >
-            <Input />
-          </Form.Item>
-          <Form.Item
-            label="Address"
-            name="address"
-            rules={[
-              {
-                required: true,
-                message: "Please input your address!",
-              },
-            ]}
-          >
-            <Input />
-          </Form.Item>
-          <Form.Item
-            label="Phone"
-            name="phone"
-            rules={[
-              {
-                required: true,
-                message: "Please input your phone number!",
-              },
-            ]}
-          >
-            <Input />
-          </Form.Item>
-          <Form.Item
-            label="Photo"
-            name="image"
-            // rules={[
-            //   {
-            //     required: true,
-            //     message: "Please input your username!",
-            //   },
-            // ]}
-          >
-            <Upload {...props}>
-              <Button>Click to Upload</Button>
-            </Upload>
-          </Form.Item>
 
-          <Form.Item
-            wrapperCol={{
-              offset: 8,
-              span: 16,
+  return (
+    <div className="form_input">
+      <Form
+        name="basic"
+        onFinish={onFinish}
+        onFinishFailed={onFinishFailed}
+        autoComplete="off"
+      >
+        <h3 className=" text-center">Girls Hostel</h3>
+        <Form.Item
+          label="Place title"
+          name="place_title"
+          rules={[
+            {
+              required: true,
+              message: "Please input the place title!",
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          label="Place Description"
+          name="place_descriptioon"
+          rules={[
+            {
+              required: true,
+              message: "Please input the place description!",
+            },
+          ]}
+        >
+          <TextArea rows={4} />
+        </Form.Item>
+        <Form.Item
+          label="Price per Month"
+          name="price"
+          rules={[
+            {
+              required: true,
+              message: "Please input the price!",
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          label="Address"
+          name="address"
+          rules={[
+            {
+              required: true,
+              message: "Please input the address!",
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          label="Phone"
+          name="phone"
+          rules={[
+            {
+              required: true,
+              message: "Please input the phone number!",
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item label="Hostel Features" name="features">
+          <Select
+            mode="multiple"
+            showArrow
+            // tagRender={tagRender}
+            // defaultValue={["gold", "cyan"]}
+            style={{
+              width: "100%",
             }}
-          >
-            <Button className="add-submit-button" type="primary" htmlType="submit">
-              Submit
-            </Button>
-          </Form.Item>
-        </Form>
-      </div>
-    </Layout>
+            options={options}
+          />
+        </Form.Item>
+        <div className=" flex items-center justify-center mb-4">
+          <input
+            type="file"
+            onChange={(e) => setImages(e.target.files)}
+            multiple
+          />
+        </div>
+
+        <Form.Item>
+          <Button type="primary" htmlType="submit">
+            Submit
+          </Button>
+        </Form.Item>
+      </Form>
+    </div>
+  );
+};
+
+const BoysHostelForm = () => {
+  const [images, setImages] = useState([]);
+
+  const onFinish = async (values) => {
+    const hostel = {
+      price: values.price,
+      title: values.place_title,
+      description: values.place_descriptioon,
+      phone: values.phone,
+      address: values.address,
+      catagory: "Boys hostel",
+    };
+
+    const bodyFormData = new FormData();
+    Object.keys(hostel).map((item) => {
+      bodyFormData.append(item, hostel[item]);
+    });
+    for (let i = 0; i < images.length; i++) {
+      bodyFormData.append("photos", images[i]);
+    }
+    const { data } = await axios.post(
+      "http://localhost:8000/api/hostel/add_hostel",
+      bodyFormData,
+      {
+        headers: { "Content-Type": "multipart/form-data" },
+      }
+    );
+    if (data) {
+      toast.success("hostel added successfully");
+    }
+  };
+
+  const onFinishFailed = (errorInfo) => {
+    console.log("Failed:", errorInfo);
+  };
+
+  return (
+    <div className="form_input">
+      <Form
+        name="basic"
+        onFinish={onFinish}
+        onFinishFailed={onFinishFailed}
+        autoComplete="off"
+      >
+        <h3 className=" text-center">Boys Hostel</h3>
+        <Form.Item
+          label="Place title"
+          name="place_title"
+          rules={[
+            {
+              required: true,
+              message: "Please input the place title!",
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          label="Place Description"
+          name="place_descriptioon"
+          rules={[
+            {
+              required: true,
+              message: "Please input the place description!",
+            },
+          ]}
+        >
+          <TextArea rows={4} />
+        </Form.Item>
+        <Form.Item
+          label="Price per Month"
+          name="price"
+          rules={[
+            {
+              required: true,
+              message: "Please input the price!",
+            },
+          ]}
+        >
+          <Input type="number" />
+        </Form.Item>
+        <Form.Item
+          label="Address"
+          name="address"
+          rules={[
+            {
+              required: true,
+              message: "Please input the address!",
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          label="Phone"
+          name="phone"
+          rules={[
+            {
+              required: true,
+              message: "Please input the phone number!",
+            },
+          ]}
+        >
+          <Input type="number" />
+        </Form.Item>
+        <div className=" flex items-center justify-center mb-4">
+          <input
+            type="file"
+            onChange={(e) => setImages(e.target.files)}
+            multiple
+          />
+        </div>
+        <Form.Item>
+          <Button type="primary" htmlType="submit">
+            Submit
+          </Button>
+        </Form.Item>
+      </Form>
+    </div>
   );
 };
 

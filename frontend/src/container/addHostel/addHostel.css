@@ -1,9 +1,58 @@
-.form_input{
-    padding: 20px;
+.form_input {
+  padding: 20px;
+  padding-top: 20px;
+  padding-right: 100px;
+  padding-left: 100px;
 }
 
-.add-submit-button {
-    color: white;
-    background-color: black;
-    
+.add-hostel-btn {
+  background-color: black;
+  width: 75px;
+  border-radius: 10px;
+  justify-content: center;
+  vertical-align: middle;
+  margin-right: 450px;
+}
+
+.ant-form-item-control-input-content {
+  margin-left: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+form .ant-form-item .ant-row {
+  display: grid;
+  text-align: start;
+  place-content: center;
+}
+form .ant-form-item .ant-row .ant-col {
+  text-align: start;
+}
+form .ant-form-item .ant-row .ant-col input {
+  width: 500px;
+  height: 44px;
+  /* border: 1px solid #303030; */
+}
+form .ant-form-item .ant-row .ant-col textarea {
+  width: 500px;
+  height: 100px;
+  /* border: 1px solid #303030; */
+}
+form .ant-form-item .ant-row .ant-col button {
+  width: 500px;
+  height: 44px;
+  border: 1px solid #303030;
+  background: lightblue;
+  color: black;
+}
+form .ant-form-item .ant-row .ant-col button:hover {
+  background: lightblue;
+}
+form .ant-form-item .ant-row .ant-col .ant-upload button {
+  background: none;
+}
+
+.ant-select-selector {
+  width: 500px;
+  min-height: 44px;
 }

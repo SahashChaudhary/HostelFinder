@@ -183,6 +183,7 @@ then set the desired styles for .card-img. */
 .card-btn {
   height: 50px;
   background: var(--bg-color);
+  background-color: rgb(201, 218, 190);
   border: 2px solid var(--main-color);
   border-radius: 5px;
   padding: 0 15px;

@@ -1,96 +1,102 @@
-import { Button, Checkbox, Form, Input } from 'antd';
-import { Link } from 'react-router-dom';
-import Layout from '../../component/Layout';
-import "./login.css"
+import { Button, Form, Input } from "antd";
+import { Link, useNavigate } from "react-router-dom";
+import Layout from "../../component/Layout";
+import "./login.css";
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import {
+  assignUserRole,
+  setLoginDetails,
+} from "../../redux/reducers/userSlice";
+import { toast } from "react-toastify";
 
-const onFinish = (values) => {
-    console.log('Success:', values);
-};
-const onFinishFailed = (errorInfo) => {
-    console.log('Failed:', errorInfo);
-};
-const Login = () => (
+const Login = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const onFinish = async (values) => {
+    const { data } = await axios.post("http://localhost:8000/api/auth/login", {
+      email: values.email,
+      password: values.password,
+    });
+    if (data.success) {
+      const { token } = data;
+      // Set the authorization header for subsequent requests
+      axios.defaults.headers.common["Authorization"] = token;
+      localStorage.setItem("userRole", "user");
+      dispatch(assignUserRole("user"));
+      dispatch(
+        setLoginDetails({
+          id: data.user._id,
+          username: data.user.name,
+          token: data.token,
+          profile: data?.user?.profile,
+        })
+      );
+      toast.success(data.message);
+      navigate("/");
+    } else {
+      toast.success(data.message);
+    }
+  };
+  const onFinishFailed = (errorInfo) => {
+    console.log("Failed:", errorInfo);
+  };
+  return (
     <div>
-    <Layout>
+      <Layout>
         <div>
-        <h1 className="login-title">Login to your account</h1>
+          <h1 className="login-title">Login to your account</h1>
         </div>
         <div className="logindetail">
-        <Form
+          <Form
             name="basic"
-            labelCol={{
-                span: 8,
-            }}
-            wrapperCol={{
-                span: 16,
-            }}
-            style={{
-                maxWidth: 600,
-            }}
             initialValues={{
-                remember: true,
+              remember: true,
             }}
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
             autoComplete="off"
-        >
+          >
             <Form.Item
-                label="Username"
-                name="username"
-                rules={[
-                    {
-                        required: true,
-                        message: 'Please input your username!',
-                    },
-                ]}
+              label="Email"
+              name="email"
+              rules={[
+                {
+                  required: true,
+                },
+              ]}
             >
-                <Input />
+              <Input />
             </Form.Item>
 
             <Form.Item
-                label="Password"
-                name="password"
-                rules={[
-                    {
-                        required: true,
-                        message: 'Please input your password!',
-                    },
-                ]}
+              label="Password"
+              name="password"
+              rules={[
+                {
+                  required: true,
+                },
+              ]}
             >
-                <Input.Password />
+              <Input />
             </Form.Item>
 
-            <Form.Item
-                name="remember"
-                valuePropName="checked"
-                wrapperCol={{
-                    offset: 8,
-                    span: 16,
-                }}
-            >
-                <Checkbox>Remember me</Checkbox>
+            <Form.Item>
+              <Button className="login-button" type="primary" htmlType="submit">
+                Log In
+              </Button>
             </Form.Item>
 
-            <Form.Item
-                wrapperCol={{
-                    offset: 8,
-                    span: 16,
-                }}
-            >
-                <Button className='login-button' type="primary" htmlType="submit">
-                    Log In
-                </Button>
-            </Form.Item>
-            
-            <p className="login-text-noacc">
-                Do not have an account?{" "}
-                <Link to="/register" className="login-font-bold">
-                  Register
-                </Link>
-              </p>
-        </Form>
+            <p className="login-text-noacc text-center">
+              Do not have an account?{" "}
+              <Link to="/register" className="login-font-bold">
+                Register
+              </Link>
+            </p>
+          </Form>
         </div>
-    </Layout>
+      </Layout>
     </div>
-);
-export default Login
+  );
+};
+export default Login;

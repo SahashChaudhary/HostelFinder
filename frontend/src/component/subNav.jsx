@@ -1,21 +1,16 @@
-import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 const SubNav = () => {
-  const navigate = useNavigate();
+  const { isLoggedIn } = useSelector((state) => state.user);
+
   const navDetails = [
-    "Home",
-    "Boys Hostel",
-    "Girls Hostel",
-    "Add Hostel",
-    "Add Location",
+    { title: "Home", link: "/" },
+    { title: "Boys Hostel", link: "/boys-hostel" },
+    { title: "Girls Hostel", link: "/girls-hostel" },
+    { title: "Add Hostel", link: isLoggedIn ? "/add_hostel" : "/login" },
+    { title: "Location", link: "/" },
   ];
 
-  const handleClick = (value) => {
-    if (value === "Add Hostel") {
-      navigate("/add_hostel");
-    } else if (value === "Home") {
-      navigate("/");
-    }
-  };
   return (
     <div>
       <div
@@ -25,21 +20,14 @@ const SubNav = () => {
           alignItems: "center",
           gap: "10px",
           height: "50px",
+          marginTop: "20px",
         }}
       >
         {navDetails.map((item, id) => {
           return (
-            <div
-              key={id}
-              style={{
-                border: "1px solid black",
-                padding: "10px",
-                cursor: "pointer",
-              }}
-              onClick={(e) => handleClick(e.target.innerHTML)}
-            >
-              {item}
-            </div>
+            <Link key={id} to={item.link}>
+              <button className="button">{item.title}</button>
+            </Link>
           );
         })}
       </div>

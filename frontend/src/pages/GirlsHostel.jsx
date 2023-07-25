@@ -1,15 +1,16 @@
 import Layout from "../component/Layout";
-import Homecard from "../card/homecard";
-import "./homepage.css";
 import axios from "axios";
 import { useEffect } from "react";
 import { useState } from "react";
+import LongCard from "../card/longCard";
 
-const Homepage = () => {
+const GirlsHostel = () => {
   const [hostel, setHostel] = useState([]);
   const getAllHostel = async () => {
-    const response = await axios.get("http://localhost:8000/api/hostel/hostel");
-    setHostel(response.data.rooms);
+    const response = await axios.get(
+      "http://localhost:8000/api/hostel/catagory/girlshostel"
+    );
+    setHostel(response.data.hostels);
   };
   useEffect(() => {
     getAllHostel();
@@ -18,14 +19,10 @@ const Homepage = () => {
   return (
     <Layout>
       <div className="flex gap-[10px] flex-wrap mt-[10px] p-[20px]">
-        {hostel.map((item, id) => {
+        {hostel.map((item) => {
           return (
             <div key={item._id}>
-              <Homecard
-                title={item.title}
-                price={item.price}
-                description={item.description}
-              />
+              <LongCard item={item} />
             </div>
           );
         })}
@@ -34,4 +31,4 @@ const Homepage = () => {
   );
 };
 
-export default Homepage;
+export default GirlsHostel;

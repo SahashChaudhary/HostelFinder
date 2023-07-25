@@ -8,7 +8,7 @@ const SubNav = () => {
     { title: "Boys Hostel", link: "/boys-hostel" },
     { title: "Girls Hostel", link: "/girls-hostel" },
     { title: "Add Hostel", link: isLoggedIn ? "/add_hostel" : "/login" },
-    { title: "Add Location", link: "/" },
+    { title: "Location", link: "/" },
   ];
 
   return (
@@ -20,31 +20,13 @@ const SubNav = () => {
           alignItems: "center",
           gap: "10px",
           height: "50px",
+          marginTop: "20px",
         }}
       >
         {navDetails.map((item, id) => {
           return (
             <Link key={id} to={item.link}>
-              <div
-                style={{
-                  border: "1px solid black",
-                  padding: "10px",
-                  cursor: "pointer",
-                  backgroundColor: "lightblue",
-                  color: "black",
-                  borderRadius: "5px",
-                  boxShadow: "0 2px 4px rgba(0, 0, 0, 0.2)",
-                  transition: "background-color 0.3s ease",
-                }}
-                onMouseEnter={(e) => {
-                  e.target.style.transform = "scale(1.1)";
-                }}
-                onMouseLeave={(e) => {
-                  e.target.style.transform = "scale(1)";
-                }}
-              >
-                {item.title}
-              </div>
+              <button className="button">{item.title}</button>
             </Link>
           );
         })}

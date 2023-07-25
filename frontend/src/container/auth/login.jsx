@@ -1,4 +1,4 @@
-import { Button, Checkbox, Form, Input } from "antd";
+import { Button, Form, Input } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import Layout from "../../component/Layout";
 import "./login.css";
@@ -50,15 +50,6 @@ const Login = () => {
         <div className="logindetail">
           <Form
             name="basic"
-            labelCol={{
-              span: 8,
-            }}
-            wrapperCol={{
-              span: 16,
-            }}
-            style={{
-              maxWidth: 600,
-            }}
             initialValues={{
               remember: true,
             }}
@@ -87,32 +78,16 @@ const Login = () => {
                 },
               ]}
             >
-              <Input.Password />
+              <Input />
             </Form.Item>
 
-            <Form.Item
-              name="remember"
-              valuePropName="checked"
-              wrapperCol={{
-                offset: 8,
-                span: 16,
-              }}
-            >
-              <Checkbox>Remember me</Checkbox>
-            </Form.Item>
-
-            <Form.Item
-              wrapperCol={{
-                offset: 8,
-                span: 16,
-              }}
-            >
+            <Form.Item>
               <Button className="login-button" type="primary" htmlType="submit">
                 Log In
               </Button>
             </Form.Item>
 
-            <p className="login-text-noacc">
+            <p className="login-text-noacc text-center">
               Do not have an account?{" "}
               <Link to="/register" className="login-font-bold">
                 Register

@@ -1,12 +1,25 @@
 import Layout from "../../component/Layout";
-import { Button, Upload, Form, Input } from "antd";
+import { Button, Upload, Form, Input, Select } from "antd";
 import "./addHostel.css";
 import axios from "axios";
 import { useState } from "react";
 import { toast } from "react-toastify";
 
 const { TextArea } = Input;
-
+const options = [
+  {
+    value: "24 hours electricity",
+  },
+  {
+    value: "Hot and Cold water",
+  },
+  {
+    value: "Loundary",
+  },
+  {
+    value: "Wifi",
+  },
+];
 const AddHostel = () => {
   const [isGirlsHostel, setIsGirlsHostel] = useState(false);
   return (
@@ -43,6 +56,7 @@ const GirlsHostelForm = () => {
       description: values.place_descriptioon,
       phone: values.phone,
       address: values.address,
+      features: values.features,
       catagory: "Girls hostel",
     };
 
@@ -77,7 +91,7 @@ const GirlsHostelForm = () => {
         onFinishFailed={onFinishFailed}
         autoComplete="off"
       >
-        <h3>Girls Hostel</h3>
+        <h3 className=" text-center">Girls Hostel</h3>
         <Form.Item
           label="Place title"
           name="place_title"
@@ -138,11 +152,25 @@ const GirlsHostelForm = () => {
         >
           <Input />
         </Form.Item>
-        <input
-          type="file"
-          onChange={(e) => setImages(e.target.files)}
-          multiple
-        />
+        <Form.Item label="Hostel Features" name="features">
+          <Select
+            mode="multiple"
+            showArrow
+            // tagRender={tagRender}
+            // defaultValue={["gold", "cyan"]}
+            style={{
+              width: "100%",
+            }}
+            options={options}
+          />
+        </Form.Item>
+        <div className=" flex items-center justify-center mb-4">
+          <input
+            type="file"
+            onChange={(e) => setImages(e.target.files)}
+            multiple
+          />
+        </div>
 
         <Form.Item>
           <Button type="primary" htmlType="submit">
@@ -198,7 +226,7 @@ const BoysHostelForm = () => {
         onFinishFailed={onFinishFailed}
         autoComplete="off"
       >
-        <h3>Boys Hostel</h3>
+        <h3 className=" text-center">Boys Hostel</h3>
         <Form.Item
           label="Place title"
           name="place_title"
@@ -259,12 +287,13 @@ const BoysHostelForm = () => {
         >
           <Input type="number" />
         </Form.Item>
-        <input
-          type="file"
-          onChange={(e) => setImages(e.target.files)}
-          multiple
-        />
-
+        <div className=" flex items-center justify-center mb-4">
+          <input
+            type="file"
+            onChange={(e) => setImages(e.target.files)}
+            multiple
+          />
+        </div>
         <Form.Item>
           <Button type="primary" htmlType="submit">
             Submit

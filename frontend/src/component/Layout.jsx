@@ -1,6 +1,7 @@
 import Footer from "./Footer";
 import Header from "./Header";
 import SubNav from "./subNav";
+import PropTypes from "prop-types";
 
 const Layout = ({ children }) => {
   return (
@@ -14,5 +15,7 @@ const Layout = ({ children }) => {
     </>
   );
 };
-
+Layout.propTypes = {
+  children: PropTypes.node.isRequired,
+};
 export default Layout;

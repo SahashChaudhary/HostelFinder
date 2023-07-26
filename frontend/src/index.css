@@ -12,7 +12,7 @@
 }
 
 .btn {
-  @apply bg-[lightblue] hover:bg-blue-600 py-3 px-6 text-slate-50 rounded-lg w-auto transition;
+  @apply bg-[dodgerblue] hover:bg-blue-600 py-3 px-6 text-slate-50 rounded-lg w-auto transition;
 }
 
 .btn:active {

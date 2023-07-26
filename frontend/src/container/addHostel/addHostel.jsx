@@ -2,8 +2,10 @@ import Layout from "../../component/Layout";
 import { Button, Upload, Form, Input, Select } from "antd";
 import "./addHostel.css";
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import AddLocation from "./addLocation/addLocation";
+import { useSelector } from "react-redux";
 
 const { TextArea } = Input;
 const options = [
@@ -14,10 +16,31 @@ const options = [
     value: "Hot and Cold water",
   },
   {
-    value: "Loundary",
+    value: "Laundary",
   },
   {
     value: "Wifi",
+  },
+  {
+    value: "Locker room",
+  },
+  {
+    value: "Parking Lot",
+  },
+  {
+    value: "Security Guard",
+  },
+  {
+    value: "CCTV",
+  },
+  {
+    value: "Balcony/Terrace",
+  },
+  {
+    value: "Halal Food ",
+  },
+  {
+    value: "No Smoking",
   },
 ];
 const AddHostel = () => {
@@ -49,6 +72,16 @@ const AddHostel = () => {
 const GirlsHostelForm = () => {
   const [images, setImages] = useState([]);
 
+  const { details, location } = useSelector((state) => state.room); //
+
+  const [form] = Form.useForm(); //
+
+  useEffect(() => {
+    form.setFieldsValue({
+      address: details.address,
+    });
+  }, [details.address]); //
+
   const onFinish = async (values) => {
     const hostel = {
       price: values.price,
@@ -57,6 +90,8 @@ const GirlsHostelForm = () => {
       phone: values.phone,
       address: values.address,
       features: values.features,
+      lng: location.lng, //
+      lat: location.lat, ///
       catagory: "Girls hostel",
     };
 
@@ -86,6 +121,7 @@ const GirlsHostelForm = () => {
   return (
     <div className="form_input">
       <Form
+        form={form} //
         name="basic"
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
@@ -140,6 +176,7 @@ const GirlsHostelForm = () => {
         >
           <Input />
         </Form.Item>
+        <AddLocation />
         <Form.Item
           label="Phone"
           name="phone"
@@ -192,6 +229,7 @@ const BoysHostelForm = () => {
       description: values.place_descriptioon,
       phone: values.phone,
       address: values.address,
+      features: values.features,
       catagory: "Boys hostel",
     };
 
@@ -275,6 +313,7 @@ const BoysHostelForm = () => {
         >
           <Input />
         </Form.Item>
+        <AddLocation />
         <Form.Item
           label="Phone"
           name="phone"
@@ -286,6 +325,18 @@ const BoysHostelForm = () => {
           ]}
         >
           <Input type="number" />
+        </Form.Item>
+        <Form.Item label="Hostel Features" name="features">
+          <Select
+            mode="multiple"
+            showArrow
+            // tagRender={tagRender}
+            // defaultValue={["gold", "cyan"]}
+            style={{
+              width: "100%",
+            }}
+            options={options}
+          />
         </Form.Item>
         <div className=" flex items-center justify-center mb-4">
           <input

@@ -78,15 +78,13 @@ const Login = () => {
                 },
               ]}
             >
-              <Input />
+              <Input type="password" />
             </Form.Item>
-
             <Form.Item>
               <Button className="login-button" type="primary" htmlType="submit">
                 Log In
               </Button>
             </Form.Item>
-
             <p className="login-text-noacc text-center">
               Do not have an account?{" "}
               <Link to="/register" className="login-font-bold">

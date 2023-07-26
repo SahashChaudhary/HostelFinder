@@ -14,11 +14,33 @@ const options = [
     value: "Hot and Cold water",
   },
   {
-    value: "Loundary",
+    value: "Laundary",
   },
   {
     value: "Wifi",
   },
+  {
+    value: "Locker room",
+  },
+  {
+    value: "Parking Lot",
+  },
+  {
+    value: "Security Guard",
+  },
+  {
+    value: "CCTV",
+  },
+  {
+    value: "Balcony/Terrace",
+  },
+  {
+    value: "Halal Food ",
+  },
+  {
+    value: "No Smoking",
+  },
+
 ];
 const AddHostel = () => {
   const [isGirlsHostel, setIsGirlsHostel] = useState(false);
@@ -192,6 +214,7 @@ const BoysHostelForm = () => {
       description: values.place_descriptioon,
       phone: values.phone,
       address: values.address,
+      features: values.features,
       catagory: "Boys hostel",
     };
 
@@ -286,6 +309,18 @@ const BoysHostelForm = () => {
           ]}
         >
           <Input type="number" />
+        </Form.Item>
+        <Form.Item label="Hostel Features" name="features">
+          <Select
+            mode="multiple"
+            showArrow
+            // tagRender={tagRender}
+            // defaultValue={["gold", "cyan"]}
+            style={{
+              width: "100%",
+            }}
+            options={options}
+          />
         </Form.Item>
         <div className=" flex items-center justify-center mb-4">
           <input

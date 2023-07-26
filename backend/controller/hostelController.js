@@ -7,17 +7,11 @@ exports.createRoom = async (req, res) => {
     for (let i = 0; i < req.files.length; i++) {
       reqFiles.push(url + "/uploads/" + req.files[i].filename);
     }
-    const { title, price, phone, address, description, catagory, features } =
-      req.body;
+    // const { title, price, phone, address, description, catagory, features,lng } =
+    //   req.body;
 
     const newHostel = new hostelModel({
-      title,
-      price,
-      phone,
-      address,
-      description,
-      catagory,
-      features,
+      ...req.body,
       img_collection: reqFiles,
     });
     await newHostel.save();

@@ -2,8 +2,10 @@ import Layout from "../../component/Layout";
 import { Button, Upload, Form, Input, Select } from "antd";
 import "./addHostel.css";
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import AddLocation from "./addLocation/addLocation";
+import { useSelector } from "react-redux";
 
 const { TextArea } = Input;
 const options = [
@@ -40,7 +42,6 @@ const options = [
   {
     value: "No Smoking",
   },
-
 ];
 const AddHostel = () => {
   const [isGirlsHostel, setIsGirlsHostel] = useState(false);
@@ -71,6 +72,16 @@ const AddHostel = () => {
 const GirlsHostelForm = () => {
   const [images, setImages] = useState([]);
 
+  const { details, location } = useSelector((state) => state.room); //
+
+  const [form] = Form.useForm(); //
+
+  useEffect(() => {
+    form.setFieldsValue({
+      address: details.address,
+    });
+  }, [details.address]); //
+
   const onFinish = async (values) => {
     const hostel = {
       price: values.price,
@@ -79,6 +90,8 @@ const GirlsHostelForm = () => {
       phone: values.phone,
       address: values.address,
       features: values.features,
+      lng: location.lng, //
+      lat: location.lat, ///
       catagory: "Girls hostel",
     };
 
@@ -108,6 +121,7 @@ const GirlsHostelForm = () => {
   return (
     <div className="form_input">
       <Form
+        form={form} //
         name="basic"
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
@@ -162,6 +176,7 @@ const GirlsHostelForm = () => {
         >
           <Input />
         </Form.Item>
+        <AddLocation />
         <Form.Item
           label="Phone"
           name="phone"
@@ -298,6 +313,7 @@ const BoysHostelForm = () => {
         >
           <Input />
         </Form.Item>
+        <AddLocation />
         <Form.Item
           label="Phone"
           name="phone"

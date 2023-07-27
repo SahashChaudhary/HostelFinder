@@ -5,6 +5,7 @@ const {
   getRoomByCatagoryBoysHostel,
   getRoomByCatagoryGirlsHostel,
   getSingleHostel,
+  searchRoom,
 } = require("../controller/hostelController");
 const router = express.Router();
 const multer = require("multer");
@@ -22,6 +23,8 @@ const storage = multer.diskStorage({
   },
 });
 
+
+
 const upload = multer({ storage: storage });
 
 router.post("/add_hostel", upload.array("photos", 12), createRoom);
@@ -29,5 +32,7 @@ router.get("/hostel", getRoom);
 router.get("/catagory/boyshostel", getRoomByCatagoryBoysHostel);
 router.get("/catagory/girlshostel", getRoomByCatagoryGirlsHostel);
 router.get("/hostel/:rid", getSingleHostel);
+//serch key
+router.get("/search/:keyword", searchRoom);
 
 module.exports = router;

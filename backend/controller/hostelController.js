@@ -80,6 +80,29 @@ exports.getRoomByCatagoryGirlsHostel = async (req, res) => {
   }
 };
 
+// search bar
+exports.searchRoom = async (req, res) => {
+  try {
+    const { keyword } = req.params;
+    const resutls = await hostelModel.find({
+      $or: [
+        { title: { $regex: keyword, $options: "i" } },
+        { description: { $regex: keyword, $options: "i" } },
+        { features: { $regex: keyword, $options: "i" } },
+        { address: { $regex: keyword, $options: "i" } },
+      ],
+    });
+    res.send({ resutls });
+  } catch (error) {
+    console.log(error);
+    res.status(400).send({
+      success: false,
+      message: "Error In Search Product API",
+      error,
+    });
+  }
+};
+
 //get single room
 exports.getSingleHostel = async (req, res) => {
   try {

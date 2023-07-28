@@ -1,0 +1,220 @@
+[33mcommit 16613bb90f351d5ff940e0a81640ba699015806f[m[33m ([m[1;36mHEAD -> [m[1;32mdevelop[m[33m, [m[1;31morigin/develop[m[33m)[m
+Author: Nishant chaudhary <nishantchaudhary842@gmail.com>
+Date:   Fri Jul 28 22:38:25 2023 +0545
+
+    total hostel and user count
+
+[33mcommit 9370a43c5beef98bc512bf0ec6ace6b8b9ae37e1[m
+Author: Nishant chaudhary <nishantchaudhary842@gmail.com>
+Date:   Fri Jul 28 22:15:01 2023 +0545
+
+    pagination feature added
+
+[33mcommit 830f383adc8ddc6c805c4216fc6e2d9e34f8a3e2[m
+Author: Nishant chaudhary <nishantchaudhary842@gmail.com>
+Date:   Fri Jul 28 21:57:13 2023 +0545
+
+    final
+
+[33mcommit 25fe32d977f1693b3e129c2b9564c811c11f38c0[m
+Merge: 8780607 03e8fa0
+Author: Nishant chaudhary <nishantchaudhary842@gmail.com>
+Date:   Fri Jul 28 21:55:29 2023 +0545
+
+    Merge branch 'suraj' of https://github.com/SahashChaudhary/HostelFinder into develop
+
+[33mcommit 87806073db8dd44daa01e05aff6e36658834705c[m
+Author: Nishant chaudhary <nishantchaudhary842@gmail.com>
+Date:   Fri Jul 28 21:54:39 2023 +0545
+
+    delete feature added
+
+[33mcommit 03e8fa0a370df9321a0ac87e672a30fc885c4e22[m[33m ([m[1;31morigin/suraj[m[33m)[m
+Author: surajdhami46 <suraj.181349@ncit.edu.np>
+Date:   Fri Jul 28 21:54:21 2023 +0545
+
+    404 page
+
+[33mcommit b8a2ed11f099a14b39f8d27822b9479cc2640548[m
+Author: surajdhami46 <suraj.181349@ncit.edu.np>
+Date:   Fri Jul 28 21:04:36 2023 +0545
+
+    location removal
+
+[33mcommit 4830b53bdff5dbfcb6c0ccb2f2231720a737eab9[m
+Author: surajdhami46 <suraj.181349@ncit.edu.np>
+Date:   Fri Jul 28 20:29:44 2023 +0545
+
+    map on both catagory
+
+[33mcommit 57c08d039147c44265f5d66643caec764647c241[m
+Author: Nishant chaudhary <nishantchaudhary842@gmail.com>
+Date:   Fri Jul 28 09:09:19 2023 +0545
+
+    update feature added
+
+[33mcommit a1b587640553bbf35dc7aa9431abc44312d39ad9[m
+Author: surajdhami46 <suraj.181349@ncit.edu.np>
+Date:   Thu Jul 27 21:50:53 2023 +0545
+
+    search implementation
+
+[33mcommit e556ad270a7bf700edbd5e0e8638375a6ff69a6c[m
+Author: Nishant chaudhary <nishantchaudhary842@gmail.com>
+Date:   Wed Jul 26 23:43:48 2023 +0545
+
+    map integrated
+
+[33mcommit 83e20842984dc25986f23ece4979596477bb0db5[m
+Author: surajdhami46 <suraj.181349@ncit.edu.np>
+Date:   Wed Jul 26 22:04:41 2023 +0545
+
+    both catagory feature
+
+[33mcommit 89168a48834a1c5bb0c44cd3c0bb3fd3d2afb362[m
+Merge: d83c640 ba185ef
+Author: surajdhami46 <suraj.181349@ncit.edu.np>
+Date:   Wed Jul 26 08:20:33 2023 +0545
+
+    Merge branch 'develop' of https://github.com/SahashChaudhary/HostelFinder into suraj
+
+[33mcommit d83c640e7c2357ea233e5d92890743edf19fa2d1[m
+Merge: 84941c9 097c216
+Author: surajdhami46 <suraj.181349@ncit.edu.np>
+Date:   Wed Jul 26 08:15:28 2023 +0545
+
+    Merge branch 'develop' of https://github.com/SahashChaudhary/HostelFinder into suraj
+
+[33mcommit ba185ef3e859b03fc6b08c41eb3fe015bb42a89a[m
+Author: Nishant chaudhary <nishantchaudhary842@gmail.com>
+Date:   Tue Jul 25 23:05:19 2023 +0545
+
+    respective ui and hoster feature field added
+
+[33mcommit 097c2163b7d3775b3065a8c4e858a0ddb797e154[m
+Author: Nishant chaudhary <nishantchaudhary842@gmail.com>
+Date:   Sun Jul 23 23:32:41 2023 +0545
+
+    middleware in add hostel
+
+[33mcommit 84941c998ad88fdbf7010b3268259a5796a60b6d[m
+Author: surajdhami46 <suraj.181349@ncit.edu.np>
+Date:   Sun Jul 23 23:05:08 2023 +0545
+
+    problem fix
+
+[33mcommit 16cd4d48fce6c303bdde9cec0eea91fe3510d19e[m
+Author: Nishant chaudhary <nishantchaudhary842@gmail.com>
+Date:   Sun Jul 23 22:32:33 2023 +0545
+
+    respective ui with fuctionality
+
+[33mcommit b0f865966e511bf2ba045864b5b005763058444a[m
+Author: Nishant chaudhary <nishantchaudhary842@gmail.com>
+Date:   Sun Jul 23 21:28:53 2023 +0545
+
+    redux setup , authentication
+
+[33mcommit f6937799245acb86d4e6d81db45f38b5e80a06d2[m[33m ([m[1;32msuraj[m[33m)[m
+Author: surajdhami46 <suraj.181349@ncit.edu.np>
+Date:   Tue Jul 18 23:08:47 2023 +0545
+
+    toastify
+
+[33mcommit eebac86f1a85c5fc3458a46e538910f02ded5b8e[m
+Author: Nishant chaudhary <nishantchaudhary842@gmail.com>
+Date:   Mon Jul 17 14:18:41 2023 +0545
+
+    add functionality from frontend
+
+[33mcommit cd607aa6dae155db24e2998f29155390b4de70f1[m
+Author: surajdhami46 <suraj.181349@ncit.edu.np>
+Date:   Mon Jul 17 00:34:21 2023 +0545
+
+    searchbar
+
+[33mcommit 546689e5f3d00a2196cb165e2c10045139dbe299[m
+Author: surajdhami46 <suraj.181349@ncit.edu.np>
+Date:   Sun Jul 16 09:47:27 2023 +0545
+
+    catagoryset
+
+[33mcommit 38aba8d7e7f408a4fad892f6e6a51a63bf622caf[m
+Author: surajdhami46 <suraj.181349@ncit.edu.np>
+Date:   Sun Jul 16 09:17:42 2023 +0545
+
+    formimage
+
+[33mcommit 39e743b357d9e7e317f4eff8015d5754f5f7ab64[m
+Author: surajdhami46 <suraj.181349@ncit.edu.np>
+Date:   Sun Jul 16 01:08:05 2023 +0545
+
+    coverpage_UI
+
+[33mcommit 45c4cf54cd6956f9dd1e53bed9115f0ff40ec6d4[m
+Author: surajdhami46 <suraj.181349@ncit.edu.np>
+Date:   Fri Jul 14 18:56:22 2023 +0545
+
+    navcolor
+
+[33mcommit c3d877e8378dfadf140a95745aa28ba8efe09533[m[33m ([m[1;31morigin/nav[m[33m)[m
+Author: Nishant chaudhary <nishantchaudhary842@gmail.com>
+Date:   Thu Jul 6 23:36:56 2023 +0545
+
+    auth
+
+[33mcommit be011d97d95f625f23f6eb8c0879ede41a01f90b[m
+Merge: 0c54074 ed26b22
+Author: Nishant chaudhary <nishantchaudhary842@gmail.com>
+Date:   Thu Jul 6 22:09:11 2023 +0545
+
+    Merge branch 'suraj' of https://github.com/SahashChaudhary/HostelFinder into develop
+
+[33mcommit ed26b2252431517a74bdf8739897e197e7b0f2fd[m
+Author: surajdhami46 <suraj.181349@ncit.edu.np>
+Date:   Thu Jul 6 22:05:55 2023 +0545
+
+    catagory
+
+[33mcommit f67f13c48fa0a825661855d1fedab780686296ee[m
+Author: surajdhami46 <suraj.181349@ncit.edu.np>
+Date:   Wed Jun 28 10:43:19 2023 +0545
+
+    color change of button
+
+[33mcommit 0c540747ff20cd3371891767653cf5f2157b0cbc[m
+Merge: 05020fa 427b5ea
+Author: Nishant chaudhary <nishantchaudhary842@gmail.com>
+Date:   Tue Jun 27 23:33:15 2023 +0545
+
+    Merge branch 'suraj' of https://github.com/SahashChaudhary/HostelFinder into develop
+
+[33mcommit 427b5ea531f0a6fdf1952e9d71e98823561faae1[m
+Author: surajdhami46 <suraj.181349@ncit.edu.np>
+Date:   Tue Jun 27 23:09:38 2023 +0545
+
+    dhami
+
+[33mcommit d39508112476ff039672e622fad10df79fd0eef0[m
+Author: surajdhami46 <suraj.181349@ncit.edu.np>
+Date:   Mon Jun 26 23:22:11 2023 +0545
+
+    radiobutton
+
+[33mcommit a5d1ae53b2e37dbde43f1c212c7a88e4b81d80f8[m
+Author: surajdhami46 <suraj.181349@ncit.edu.np>
+Date:   Mon Jun 26 22:42:26 2023 +0545
+
+    commit
+
+[33mcommit 05020fadc6c16135534fe7b0d3e8feb10e5f4a64[m[33m ([m[1;32mmain[m[33m)[m
+Author: Sahash Chaudhary <chysahash07@gmail.com>
+Date:   Mon Jun 26 22:00:06 2023 +0545
+
+    updated
+
+[33mcommit 170d513eabce4b3e78c97d845919b0155f769185[m
+Author: Sahash Chaudhary <chysahash07@gmail.com>
+Date:   Sat Jun 24 23:48:10 2023 +0545
+
+    first commit

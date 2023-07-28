@@ -214,3 +214,34 @@ exports.deleteRoom = async (req, res) => {
     });
   }
 };
+
+// product list base on page
+exports.productListController = async (req, res) => {
+  try {
+    const page = req.params.page ? req.params.page : 1;
+    let totalItem = await hostelModel.find().count();
+    if (totalItem % req.query.size != 0) {
+      totalItem = Math.ceil(totalItem / req.query.size);
+    } else {
+      totalItem = totalItem / req.query.size;
+    }
+    const rooms = await hostelModel
+      .find()
+      .skip((page - 1) * req.query.size)
+      .limit(req.query.size)
+      .sort({ createdAt: -1 });
+
+    res.status(200).send({
+      success: true,
+      rooms,
+      totalItem,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(400).send({
+      success: false,
+      message: "error in per page ctrl",
+      error,
+    });
+  }
+};

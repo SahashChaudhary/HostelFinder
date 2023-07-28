@@ -7,12 +7,18 @@ import { useState } from "react";
 import LongCard from "../../card/longCard";
 import CoverImage from "./coverImage";
 import SubCover from "./subCover";
+import Paginations from "../../Utils/pagination";
 
 const Homepage = () => {
   const [hostel, setHostel] = useState([]);
-  const getAllHostel = async () => {
-    const response = await axios.get("http://localhost:8000/api/hostel/hostel");
+  const [radio, setRadio] = useState([]);
+  const [pageNumber, setPageNumber] = useState();
+  const getAllHostel = async (page) => {
+    const response = await axios.get(
+      `http://localhost:8000/api/hostel/product-list/${page}?size=6`
+    );
     setHostel(response.data.rooms);
+    setPageNumber(response.data.totalItem);
   };
   useEffect(() => {
     getAllHostel();
@@ -30,6 +36,10 @@ const Homepage = () => {
             </div>
           );
         })}
+      </div>
+
+      <div className="flex justify-end p-10">
+        <Paginations pageNumber={pageNumber} handlePage={getAllHostel} />
       </div>
     </Layout>
   );

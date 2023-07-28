@@ -20,6 +20,11 @@ const hostelSchema = mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "users",
     },
+    uid: { type: String, required: true },
+    uName: { type: String, required: true },
+    uEmail: { type: String, required: true },
+    uPhone: { type: String, required: true },
+    // uPhoto: { type: String, default: "" },
   },
   { timestamps: true }
 );

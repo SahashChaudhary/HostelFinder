@@ -80,11 +80,11 @@ exports.userLogin = async (req, res) => {
     //token
     const token = await JWT.sign(
       {
-        // _id: user._id,
-        // name: user.name,
-        // uPhoto: user.profile,
-        // uEmail: user.email,
-        // uPhone: user.phone,
+        _id: user._id,
+        name: user.name,
+        uPhoto: user.profile,
+        uEmail: user.email,
+        uPhone: user.phone,
       },
       process.env.SECRETE_KEY,
       {
@@ -99,7 +99,7 @@ exports.userLogin = async (req, res) => {
         name: user.name,
         email: user.email,
         phone: user.phone,
-        // address: user.address,
+        address: user.address,
         // role: user.role,
         // profile: user?.profile
       },

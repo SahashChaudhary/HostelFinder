@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -8,6 +8,8 @@ import "./nav.css";
 import { resetLoginDetails } from "../redux/reducers/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import axios from "axios";
+import { searchHostel } from "../redux/reducers/hostelSlice";
 
 const Header = () => {
   const location = useLocation();
@@ -25,6 +27,18 @@ const Header = () => {
     navigate("/");
     toast.success("logout successfully");
   };
+  const handleSearch = async () => {
+    const { data } = await axios.get(
+      `http://localhost:8000/api/hostel/search/${inputValue}`
+    );
+    console.log(data);
+    if (data) {
+      dispatch(searchHostel(data.resutls));
+      navigate("/search");
+    }
+  };
+
+  useEffect(() => {}, []);
 
   return (
     <div className="nav">
@@ -48,7 +62,9 @@ const Header = () => {
                   className="search-input"
                   style={{ color: "black" }}
                 />
-                <button className="search-button">Search</button>
+                <button className="search-button" onClick={handleSearch}>
+                  Search
+                </button>
               </div>
             )}
             {isLoggedIn ? (

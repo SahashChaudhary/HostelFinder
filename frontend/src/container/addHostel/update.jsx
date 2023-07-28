@@ -44,7 +44,7 @@ const options = [
     value: "No Smoking",
   },
 ];
-const AddHostel = () => {
+const UpdateHostel = () => {
   const [isGirlsHostel, setIsGirlsHostel] = useState(false);
   return (
     <Layout>
@@ -117,29 +117,17 @@ const GirlsHostelForm = () => {
     for (let i = 0; i < images.length; i++) {
       bodyFormData.append("photos", images[i]);
     }
-    // if (state.roomId) {
-    //   const { data } = await axios.put(
-    //     `http://localhost:8000/api/hostel/update/${state.roomId}`,
-    //     bodyFormData,
-    //     {
-    //       headers: { "Content-Type": "multipart/form-data" },
-    //     }
-    //   );
-    //   if (data) {
-    //     toast.success("hostel Updated");
-    //   }
-    // } else {
-    const { data } = await axios.post(
-      "http://localhost:8000/api/hostel/add_hostel",
+
+    const { data } = await axios.put(
+      `http://localhost:8000/api/hostel/update/${state.roomId}`,
       bodyFormData,
       {
         headers: { "Content-Type": "multipart/form-data" },
       }
     );
     if (data) {
-      toast.success("hostel added successfully");
+      toast.success("hostel Updated");
     }
-    // }
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -383,4 +371,4 @@ const BoysHostelForm = () => {
   );
 };
 
-export default AddHostel;
+export default UpdateHostel;

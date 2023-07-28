@@ -32,6 +32,7 @@ const Login = () => {
           profile: data?.user?.profile,
         })
       );
+      localStorage.setItem("token", token);
       toast.success(data.message);
       navigate("/");
     } else {

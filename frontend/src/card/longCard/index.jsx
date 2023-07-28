@@ -18,7 +18,7 @@ export default function LongCard({ item }) {
           <p className=" font-extrabold text-2xl w-[250px]">{item?.title}</p>
           <p className=" font-bold text-xl text-blue-600">Nrs: {item.price}</p>
           <div className={styles.label_value_wrapper}>
-            <p className={styles.label}>Categroty:</p>
+            <p className={styles.label}>Catagory:</p>
             <p className={styles.value}>{item.catagory}</p>
           </div>
           <div className={styles.label_value_wrapper}>

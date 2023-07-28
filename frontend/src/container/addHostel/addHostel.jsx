@@ -62,10 +62,10 @@ const AddHostel = () => {
           }}
           style={{ backgroundColor: "red", color: "white" }}
         >
-          {!isGirlsHostel ? "Change to Boys Hostel" : "Change to Girls Hostel"}
+          {isGirlsHostel ? "Change to Boys Hostel" : "Change to Girls Hostel"}
         </Button>
       </div>
-      {!isGirlsHostel ? <GirlsHostelForm /> : <BoysHostelForm />}
+      {isGirlsHostel ? <GirlsHostelForm /> : <BoysHostelForm />}
     </Layout>
   );
 };
@@ -248,7 +248,31 @@ const GirlsHostelForm = () => {
 };
 
 const BoysHostelForm = () => {
+  const { state = {} } = useLocation();
+  console.log(state);
+
   const [images, setImages] = useState([]);
+  const { details, location } = useSelector((state) => state.room); //
+
+  const [form] = Form.useForm(); //
+
+  useEffect(() => {
+    form.setFieldsValue({
+      address: details.address,
+    });
+  }, [details.address]); //
+  useEffect(() => {
+    if (state?.roomId) {
+      form.setFieldsValue({
+        address: state.data.address,
+        place_title: state.data.title,
+        place_descriptioon: state.data.description,
+        price: state.data.price,
+        phone: state.data.phone,
+      });
+    }
+  }, []); //
+  
 
   const onFinish = async (values) => {
     const hostel = {
@@ -258,6 +282,8 @@ const BoysHostelForm = () => {
       phone: values.phone,
       address: values.address,
       features: values.features,
+      lng: location.lng, //
+      lat: location.lat, ///
       catagory: "Boys hostel",
     };
 
@@ -287,6 +313,7 @@ const BoysHostelForm = () => {
   return (
     <div className="form_input">
       <Form
+      form={form}
         name="basic"
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}

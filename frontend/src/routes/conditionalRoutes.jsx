@@ -12,7 +12,6 @@ import MyHostel from "../pages/myHostel";
 import UpdateHostel from "../container/addHostel/update";
 import PageNotFound from "../utils/PageNotFound";
 
-
 const ConditionalRoutes = () => {
   const { userRole } = useSelector((state) => state.user);
   if (userRole === "user") {

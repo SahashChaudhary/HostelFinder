@@ -8,6 +8,8 @@ const {
   searchRoom,
   getUserRooms,
   updateHostel,
+  deleteRoom,
+  productListController,
 } = require("../controller/hostelController");
 const router = express.Router();
 const multer = require("multer");
@@ -46,4 +48,8 @@ router.put(
   requireSignIn,
   updateHostel
 );
+//delete room
+router.delete("/deleteHostel/:rid", requireSignIn, deleteRoom);
+//
+router.get("/product-list/:page", productListController);
 module.exports = router;

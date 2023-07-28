@@ -1,4 +1,5 @@
 const hostelModel = require("../modal/hostelModel");
+const userModel = require("../modal/userModal");
 
 exports.createRoom = async (req, res) => {
   try {
@@ -183,6 +184,69 @@ exports.getUserRooms = async (req, res) => {
     res.status(500).send({
       success: false,
       message: "Error while getting Rooms",
+    });
+  }
+};
+
+exports.deleteRoom = async (req, res) => {
+  try {
+    const { id: uid } = req.user;
+    const roomId = req.params.rid;
+    //rid =  room id
+    const room = await hostelModel.findById(roomId);
+
+    if (!room || room.id !== roomId) {
+      return res.status(500).send({
+        success: false,
+        message: "Access denied. You are not authorized to delete this room.",
+      });
+    }
+    await hostelModel.findByIdAndDelete(roomId);
+    res.status(200).send({
+      success: true,
+      message: "Room deleted successfully.",
+      room,
+    });
+  } catch (error) {
+    console.log(error, "delete controller");
+    res.status(500).send({
+      success: false,
+      message: "Failed to delete",
+    });
+  }
+};
+
+// product list base on page
+exports.productListController = async (req, res) => {
+  try {
+    const totalHostel = await hostelModel.estimatedDocumentCount();
+    const totalUser = await userModel.estimatedDocumentCount();
+    const page = req.params.page ? req.params.page : 1;
+    let totalItem = await hostelModel.find().count();
+    if (totalItem % req.query.size != 0) {
+      totalItem = Math.ceil(totalItem / req.query.size);
+    } else {
+      totalItem = totalItem / req.query.size;
+    }
+    const rooms = await hostelModel
+      .find()
+      .skip((page - 1) * req.query.size)
+      .limit(req.query.size)
+      .sort({ createdAt: -1 });
+
+    res.status(200).send({
+      success: true,
+      rooms,
+      totalItem,
+      totalHostel,
+      totalUser,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(400).send({
+      success: false,
+      message: "error in per page ctrl",
+      error,
     });
   }
 };

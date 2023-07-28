@@ -1,16 +1,16 @@
 import { FaBed, FaCity } from "react-icons/fa";
 import { AiFillHome } from "react-icons/ai";
 import { PiStudentBold } from "react-icons/pi";
-
-export default function SubCover() {
+import PropTypes from "prop-types";
+export default function SubCover({ totalHostel, totaluser }) {
   const data = [
     {
       icon: <FaBed />,
-      value: "500+ Beds",
+      value: totaluser + " Client",
     },
     {
       icon: <AiFillHome />,
-      value: "25+ Hostels",
+      value: totalHostel + "+ Hostels",
     },
     {
       icon: <PiStudentBold />,
@@ -37,3 +37,7 @@ export default function SubCover() {
     </div>
   );
 }
+SubCover.propTypes = {
+  totalHostel: PropTypes.number,
+  totaluser: PropTypes.number,
+};

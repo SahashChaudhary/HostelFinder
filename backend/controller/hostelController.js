@@ -186,3 +186,31 @@ exports.getUserRooms = async (req, res) => {
     });
   }
 };
+
+exports.deleteRoom = async (req, res) => {
+  try {
+    const { id: uid } = req.user;
+    const roomId = req.params.rid;
+    //rid =  room id
+    const room = await hostelModel.findById(roomId);
+
+    if (!room || room.id !== roomId) {
+      return res.status(500).send({
+        success: false,
+        message: "Access denied. You are not authorized to delete this room.",
+      });
+    }
+    await hostelModel.findByIdAndDelete(roomId);
+    res.status(200).send({
+      success: true,
+      message: "Room deleted successfully.",
+      room,
+    });
+  } catch (error) {
+    console.log(error, "delete controller");
+    res.status(500).send({
+      success: false,
+      message: "Failed to delete",
+    });
+  }
+};

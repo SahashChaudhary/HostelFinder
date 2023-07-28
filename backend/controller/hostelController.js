@@ -7,16 +7,17 @@ exports.createRoom = async (req, res) => {
     for (let i = 0; i < req.files.length; i++) {
       reqFiles.push(url + "/uploads/" + req.files[i].filename);
     }
-    const { title, price, phone, address, description, catagory } = req.body;
-
+    // const { title, price, phone, address, description, catagory, features,lng } =
+    //   req.body;
+    const { id: uid, uName, uPhoto, uPhone, uEmail } = req.user;
     const newHostel = new hostelModel({
-      title,
-      price,
-      phone,
-      address,
-      description,
-      catagory,
+      ...req.body,
       img_collection: reqFiles,
+      uid,
+      uName,
+      // uPhoto,
+      uPhone,
+      uEmail,
     });
     await newHostel.save();
     res.status(200).send({
@@ -84,6 +85,29 @@ exports.getRoomByCatagoryGirlsHostel = async (req, res) => {
   }
 };
 
+// search bar
+exports.searchRoom = async (req, res) => {
+  try {
+    const { keyword } = req.params;
+    const resutls = await hostelModel.find({
+      $or: [
+        { title: { $regex: keyword, $options: "i" } },
+        { description: { $regex: keyword, $options: "i" } },
+        { features: { $regex: keyword, $options: "i" } },
+        { address: { $regex: keyword, $options: "i" } },
+      ],
+    });
+    res.send({ resutls });
+  } catch (error) {
+    console.log(error);
+    res.status(400).send({
+      success: false,
+      message: "Error In Search Product API",
+      error,
+    });
+  }
+};
+
 //get single room
 exports.getSingleHostel = async (req, res) => {
   try {
@@ -98,6 +122,67 @@ exports.getSingleHostel = async (req, res) => {
     res.status(500).send({
       success: false,
       message: "Failed to get room",
+    });
+  }
+};
+
+// update room
+
+exports.updateHostel = async (req, res) => {
+  try {
+    const reqFiles = [];
+    const url = req.protocol + "://" + req.get("host");
+    for (let i = 0; i < req.files.length; i++) {
+      reqFiles.push(url + "/uploads/" + req.files[i].filename);
+    }
+    const { id } = req.user; //user id
+    const roomId = req.params.rid;
+    const room = await hostelModel.findById(roomId);
+    if (!room || room.uid !== id) {
+      return res.status(403).send({
+        success: false,
+        message: "Access denied. You are not authorized to update this room.",
+      });
+    }
+    room.img_collection = reqFiles;
+    Object.assign(room, req.body); // Merge properties from req.body
+    const updatedRoom = await room.save();
+
+    await updatedRoom.save();
+    res.status(200).send({
+      success: true,
+      message: "Hostel Updated SuccessFully",
+      updatedRoom,
+    });
+  } catch (error) {
+    console.log(error, "update error");
+    res.status(500).send({
+      success: true,
+      message: "Error While Upadating Room",
+    });
+  }
+};
+
+//get all rooms of specific users
+
+exports.getUserRooms = async (req, res) => {
+  try {
+    const userId = req.params.uid;
+    const hostels = await hostelModel
+      .find({ uid: userId })
+      .select("-photo")
+      .sort({ createdAt: -1 });
+
+    res.status(200).send({
+      success: true,
+      message: "hostel Fetched",
+      hostels,
+    });
+  } catch (error) {
+    console.log(error, "from getUserRooms Controller");
+    res.status(500).send({
+      success: false,
+      message: "Error while getting Rooms",
     });
   }
 };

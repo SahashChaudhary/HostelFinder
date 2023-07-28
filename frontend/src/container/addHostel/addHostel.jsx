@@ -1,12 +1,49 @@
 import Layout from "../../component/Layout";
-import { Button, Upload, Form, Input } from "antd";
+import { Button, Form, Input, Select } from "antd";
 import "./addHostel.css";
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import AddLocation from "./addLocation/addLocation";
+import { useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
 
 const { TextArea } = Input;
-
+const options = [
+  {
+    value: "24 hours electricity",
+  },
+  {
+    value: "Hot and Cold water",
+  },
+  {
+    value: "Laundary",
+  },
+  {
+    value: "Wifi",
+  },
+  {
+    value: "Locker room",
+  },
+  {
+    value: "Parking Lot",
+  },
+  {
+    value: "Security Guard",
+  },
+  {
+    value: "CCTV",
+  },
+  {
+    value: "Balcony/Terrace",
+  },
+  {
+    value: "Halal Food ",
+  },
+  {
+    value: "No Smoking",
+  },
+];
 const AddHostel = () => {
   const [isGirlsHostel, setIsGirlsHostel] = useState(false);
   return (
@@ -34,7 +71,31 @@ const AddHostel = () => {
 };
 
 const GirlsHostelForm = () => {
+  const { state = {} } = useLocation();
+  console.log(state);
+
   const [images, setImages] = useState([]);
+
+  const { details, location } = useSelector((state) => state.room); //
+
+  const [form] = Form.useForm(); //
+
+  useEffect(() => {
+    form.setFieldsValue({
+      address: details.address,
+    });
+  }, [details.address]); //
+  useEffect(() => {
+    if (state?.roomId) {
+      form.setFieldsValue({
+        address: state.data.address,
+        place_title: state.data.title,
+        place_descriptioon: state.data.description,
+        price: state.data.price,
+        phone: state.data.phone,
+      });
+    }
+  }, []); //
 
   const onFinish = async (values) => {
     const hostel = {
@@ -43,6 +104,9 @@ const GirlsHostelForm = () => {
       description: values.place_descriptioon,
       phone: values.phone,
       address: values.address,
+      features: values.features,
+      lng: location.lng, //
+      lat: location.lat, ///
       catagory: "Girls hostel",
     };
 
@@ -53,6 +117,18 @@ const GirlsHostelForm = () => {
     for (let i = 0; i < images.length; i++) {
       bodyFormData.append("photos", images[i]);
     }
+    // if (state.roomId) {
+    //   const { data } = await axios.put(
+    //     `http://localhost:8000/api/hostel/update/${state.roomId}`,
+    //     bodyFormData,
+    //     {
+    //       headers: { "Content-Type": "multipart/form-data" },
+    //     }
+    //   );
+    //   if (data) {
+    //     toast.success("hostel Updated");
+    //   }
+    // } else {
     const { data } = await axios.post(
       "http://localhost:8000/api/hostel/add_hostel",
       bodyFormData,
@@ -63,6 +139,7 @@ const GirlsHostelForm = () => {
     if (data) {
       toast.success("hostel added successfully");
     }
+    // }
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -72,12 +149,13 @@ const GirlsHostelForm = () => {
   return (
     <div className="form_input">
       <Form
+        form={form} //
         name="basic"
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
         autoComplete="off"
       >
-        <h3>Girls Hostel</h3>
+        <h3 className=" text-center">Girls Hostel</h3>
         <Form.Item
           label="Place title"
           name="place_title"
@@ -142,6 +220,7 @@ const GirlsHostelForm = () => {
         >
           <Input />
         </Form.Item>
+        <AddLocation />
         <Form.Item
           label="Phone"
           name="phone"
@@ -158,15 +237,29 @@ const GirlsHostelForm = () => {
         >
           <Input />
         </Form.Item>
-        <input
-          type="file"
-          onChange={(e) => setImages(e.target.files)}
-          multiple
-        />
+        <Form.Item label="Hostel Features" name="features">
+          <Select
+            mode="multiple"
+            showArrow
+            // tagRender={tagRender}
+            // defaultValue={["gold", "cyan"]}
+            style={{
+              width: "100%",
+            }}
+            options={options}
+          />
+        </Form.Item>
+        <div className=" flex items-center justify-center mb-4">
+          <input
+            type="file"
+            onChange={(e) => setImages(e.target.files)}
+            multiple
+          />
+        </div>
 
         <Form.Item>
           <Button type="primary" htmlType="submit">
-            Submit
+            submit
           </Button>
         </Form.Item>
       </Form>
@@ -175,7 +268,31 @@ const GirlsHostelForm = () => {
 };
 
 const BoysHostelForm = () => {
+  const { state = {} } = useLocation();
+  console.log(state);
+
   const [images, setImages] = useState([]);
+  const { details, location } = useSelector((state) => state.room); //
+
+  const [form] = Form.useForm(); //
+
+  useEffect(() => {
+    form.setFieldsValue({
+      address: details.address,
+    });
+  }, [details.address]); //
+  useEffect(() => {
+    if (state?.roomId) {
+      form.setFieldsValue({
+        address: state.data.address,
+        place_title: state.data.title,
+        place_descriptioon: state.data.description,
+        price: state.data.price,
+        phone: state.data.phone,
+      });
+    }
+  }, []); //
+  
 
   const onFinish = async (values) => {
     const hostel = {
@@ -184,6 +301,9 @@ const BoysHostelForm = () => {
       description: values.place_descriptioon,
       phone: values.phone,
       address: values.address,
+      features: values.features,
+      lng: location.lng, //
+      lat: location.lat, ///
       catagory: "Boys hostel",
     };
 
@@ -213,12 +333,13 @@ const BoysHostelForm = () => {
   return (
     <div className="form_input">
       <Form
+      form={form}
         name="basic"
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
         autoComplete="off"
       >
-        <h3>Boys Hostel</h3>
+        <h3 className=" text-center">Boys Hostel</h3>
         <Form.Item
           label="Place title"
           name="place_title"
@@ -267,6 +388,7 @@ const BoysHostelForm = () => {
         >
           <Input />
         </Form.Item>
+        <AddLocation />
         <Form.Item
           label="Phone"
           name="phone"
@@ -279,6 +401,7 @@ const BoysHostelForm = () => {
         >
           <Input type="number" />
         </Form.Item>
+<<<<<<< HEAD
 <<<<<<< HEAD
         <Form.Item
           label="Photo"
@@ -303,6 +426,27 @@ const BoysHostelForm = () => {
           multiple
         />
 
+=======
+        <Form.Item label="Hostel Features" name="features">
+          <Select
+            mode="multiple"
+            showArrow
+            // tagRender={tagRender}
+            // defaultValue={["gold", "cyan"]}
+            style={{
+              width: "100%",
+            }}
+            options={options}
+          />
+        </Form.Item>
+        <div className=" flex items-center justify-center mb-4">
+          <input
+            type="file"
+            onChange={(e) => setImages(e.target.files)}
+            multiple
+          />
+        </div>
+>>>>>>> 8575c7efbb7ece03af79a4cee614a1668527dbe9
         <Form.Item>
 >>>>>>> 097c2163b7d3775b3065a8c4e858a0ddb797e154
           <Button type="primary" htmlType="submit">

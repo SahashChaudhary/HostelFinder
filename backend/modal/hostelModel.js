@@ -1,8 +1,10 @@
 const mongoose = require("mongoose");
 const hostelSchema = mongoose.Schema(
   {
-    price: { type: Number },
-    title: { type: String },
+    lng: { type: Number, required: true },
+    lat: { type: Number, required: true },
+    price: { type: Number, required: true },
+    title: { type: String, required: true },
     description: {
       type: String,
       required: true,
@@ -11,6 +13,18 @@ const hostelSchema = mongoose.Schema(
     phone: { type: Number },
     address: { type: String, required: true },
     catagory: { type: String, default: "Boys hostel" },
+    features: {
+      type: String,
+    },
+    userInfo: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "users",
+    },
+    uid: { type: String, required: true },
+    uName: { type: String, required: true },
+    uEmail: { type: String, required: true },
+    uPhone: { type: String, required: true },
+    // uPhoto: { type: String, default: "" },
   },
   { timestamps: true }
 );

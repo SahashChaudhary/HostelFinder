@@ -7,7 +7,8 @@ exports.requireSignIn = async (req, res, next) => {
       req.headers.authorization,
       process.env.SECRETE_KEY
     );
-    // req.user = { id: _id, uName: name, uPhoto: uPhoto, uPhone, uEmail };
+    const { _id, name, uPhone, uEmail } = decode;
+    req.user = { id: _id, uName: name, uPhone, uEmail };
     next();
   } catch (error) {
     console.log(error);

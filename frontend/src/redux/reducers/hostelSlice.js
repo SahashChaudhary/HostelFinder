@@ -8,6 +8,7 @@ const initialState = {
   amenities: [],
   location: { lng: 0, lat: 0 },
   totalRoomCount: 0,
+  searchHostel: [],
 };
 
 export const hostelSlice = createSlice({
@@ -46,6 +47,9 @@ export const hostelSlice = createSlice({
     totalRoom: (state, actions) => {
       state.totalRoomCount = actions.payload;
     },
+    searchHostel: (state, actions) => {
+      state.searchHostel = actions.payload;
+    },
   },
 });
 
@@ -60,6 +64,7 @@ export const {
   resetAlertMessages,
   apiResStatus,
   totalRoom,
+  searchHostel,
 } = hostelSlice.actions;
 
 export default hostelSlice.reducer;

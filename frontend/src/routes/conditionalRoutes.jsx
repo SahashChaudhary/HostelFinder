@@ -10,6 +10,8 @@ import RespectiveHostel from "../pages/respectiveHostel/respectiveHostel";
 import SearchHostel from "../pages/searchHostel";
 import MyHostel from "../pages/myHostel";
 import UpdateHostel from "../container/addHostel/update";
+import PageNotFound from "../utils/PageNotFound";
+
 
 const ConditionalRoutes = () => {
   const { userRole } = useSelector((state) => state.user);
@@ -30,7 +32,7 @@ const DefaulRoutes = () => {
       <Route path="/login" element={<Login />} />
       <Route path="/hostel/:name" element={<RespectiveHostel />} />
       <Route path="/search" element={<SearchHostel />} />
-      <Route path="/meroHostel" element={<MyHostel />} />
+      <Route path="*" element={<PageNotFound />} />
     </Routes>
   );
 };
@@ -45,6 +47,7 @@ const UserRoutes = () => {
       <Route path="/search" element={<SearchHostel />} />
       <Route path="/meroHostel" element={<MyHostel />} />
       <Route path="/update" element={<UpdateHostel />} />
+      <Route path="*" element={<PageNotFound />} />
     </Routes>
   );
 };

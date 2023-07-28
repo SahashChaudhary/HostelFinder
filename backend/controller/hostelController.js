@@ -1,4 +1,5 @@
 const hostelModel = require("../modal/hostelModel");
+const userModel = require("../modal/userModal");
 
 exports.createRoom = async (req, res) => {
   try {
@@ -218,6 +219,8 @@ exports.deleteRoom = async (req, res) => {
 // product list base on page
 exports.productListController = async (req, res) => {
   try {
+    const totalHostel = await hostelModel.estimatedDocumentCount();
+    const totalUser = await userModel.estimatedDocumentCount();
     const page = req.params.page ? req.params.page : 1;
     let totalItem = await hostelModel.find().count();
     if (totalItem % req.query.size != 0) {
@@ -235,6 +238,8 @@ exports.productListController = async (req, res) => {
       success: true,
       rooms,
       totalItem,
+      totalHostel,
+      totalUser,
     });
   } catch (error) {
     console.log(error);

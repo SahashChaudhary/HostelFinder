@@ -11,14 +11,17 @@ import Paginations from "../../Utils/pagination";
 
 const Homepage = () => {
   const [hostel, setHostel] = useState([]);
-  const [radio, setRadio] = useState([]);
   const [pageNumber, setPageNumber] = useState();
+  const [totalHostel, setTotalHostel] = useState(0);
+  const [totaluser, setTotalUser] = useState(0);
   const getAllHostel = async (page) => {
     const response = await axios.get(
-      `http://localhost:8000/api/hostel/product-list/${page}?size=6`
+      `http://localhost:8000/api/hostel/product-list/${page}?size=8`
     );
     setHostel(response.data.rooms);
     setPageNumber(response.data.totalItem);
+    setTotalHostel(response.data.totalHostel);
+    setTotalUser(response.data.totalUser);
   };
   useEffect(() => {
     getAllHostel();
@@ -27,9 +30,9 @@ const Homepage = () => {
   return (
     <Layout>
       <CoverImage />
-      <SubCover />
+      <SubCover totalHostel={totalHostel} totaluser={totaluser} />
       <div className="flex justify-center item-start gap-[10px] flex-wrap mt-[10px] p-[20px]">
-        {hostel.map((item, id) => {
+        {hostel.map((item) => {
           return (
             <div key={item._id}>
               <LongCard item={item} />

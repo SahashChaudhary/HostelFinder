@@ -10,7 +10,7 @@ const SubNav = () => {
     { title: "Add Hostel", link: isLoggedIn ? "/add_hostel" : "/login" },
     { title: "My Hostels", link: "/meroHostel" },
   ];
-
+  
   return (
     <div>
       <div

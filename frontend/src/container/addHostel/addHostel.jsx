@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import AddLocation from "./addLocation/addLocation";
 import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
+import Khalti from "./khalti/khalti";
 
 const { TextArea } = Input;
 const options = [
@@ -236,7 +237,7 @@ const GirlsHostelForm = () => {
             multiple
           />
         </div>
-
+        <Khalti />
         <Form.Item>
           <Button type="primary" htmlType="submit">
             submit
@@ -272,7 +273,6 @@ const BoysHostelForm = () => {
       });
     }
   }, []); //
-  
 
   const onFinish = async (values) => {
     const hostel = {
@@ -313,7 +313,7 @@ const BoysHostelForm = () => {
   return (
     <div className="form_input">
       <Form
-      form={form}
+        form={form}
         name="basic"
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
@@ -400,6 +400,7 @@ const BoysHostelForm = () => {
             multiple
           />
         </div>
+        <Khalti />
         <Form.Item>
           <Button type="primary" htmlType="submit">
             Submit

@@ -60,3 +60,20 @@
 .button:active {
   scale: 1;
 }
+/* otp */
+.otp_container div {
+  height: 200px;
+  width: 500px;
+  border: 1px solid #303030;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+}
+
+.otp_container div input {
+  height: 4rem;
+  width: 4rem !important;
+  border: 2px solid #808080;
+  border-radius: 10px;
+}

@@ -18,6 +18,7 @@ const Login = () => {
       email: values.email,
       password: values.password,
     });
+    console.log(data);
     if (data.success) {
       const { token } = data;
       // Set the authorization header for subsequent requests
@@ -37,6 +38,7 @@ const Login = () => {
       navigate("/");
     } else {
       toast.success(data.message);
+      navigate("/verify", { state: data.data.userId });
     }
   };
   const onFinishFailed = (errorInfo) => {

@@ -1,7 +1,12 @@
-.cover_image_container{
-
+.cover_image_container {
 }
-.cover_image_container img{
+.cover_image_container img {
   width: 100vw;
   height: 30vh !important;
+}
+/* otp */
+.otp_container div {
+  height: 200px;
+  width: 200px;
+  background: red;
 }

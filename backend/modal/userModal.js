@@ -21,6 +21,7 @@ const userSchema = new mongoose.Schema(
       required: true,
       unique: true,
     },
+    verified: { type: Boolean, default: false },
 
     // profile: { type: String },
     // role: {

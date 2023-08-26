@@ -4,10 +4,12 @@ import Layout from "../../component/Layout";
 import "./register.css";
 import axios from "axios";
 import { toast } from "react-toastify";
-
+import { useState } from "react";
 const Register = () => {
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const onFinish = async (values) => {
+    setLoading(true);
     const { data } = await axios.post(
       "http://localhost:8000/api/auth/user_registration",
       {
@@ -18,9 +20,9 @@ const Register = () => {
       }
     );
     if (data) {
-      console.log("register succesffully");
-      toast.success("Register Successfully");
-      navigate("/login");
+      toast.success(data.message);
+      navigate("/verify", { state: data.data.userId });
+      setLoading(false);
     }
   };
   const onFinishFailed = (errorInfo) => {
@@ -74,7 +76,6 @@ const Register = () => {
           >
             <Input />
           </Form.Item>
-
           <Form.Item
             label="Password"
             name="password"
@@ -87,12 +88,12 @@ const Register = () => {
           >
             <Input type="password" />
           </Form.Item>
-
           <Form.Item>
             <Button
               className="register-button"
               type="primary"
               htmlType="submit"
+              loading={loading}
             >
               Register
             </Button>

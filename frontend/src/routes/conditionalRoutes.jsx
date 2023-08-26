@@ -11,6 +11,7 @@ import SearchHostel from "../pages/searchHostel";
 import MyHostel from "../pages/myHostel";
 import UpdateHostel from "../container/addHostel/update";
 import PageNotFound from "../utils/PageNotFound";
+import OtpInputField from "../Utils/otpInput";
 
 const ConditionalRoutes = () => {
   const { userRole } = useSelector((state) => state.user);
@@ -32,6 +33,7 @@ const DefaulRoutes = () => {
       <Route path="/hostel/:name" element={<RespectiveHostel />} />
       <Route path="/search" element={<SearchHostel />} />
       <Route path="*" element={<PageNotFound />} />
+      <Route path="/verify" element={<OtpInputField />} />
     </Routes>
   );
 };

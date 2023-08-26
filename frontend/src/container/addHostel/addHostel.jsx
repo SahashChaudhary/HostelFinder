@@ -45,6 +45,7 @@ const options = [
     value: "No Smoking",
   },
 ];
+
 const AddHostel = () => {
   const [isGirlsHostel, setIsGirlsHostel] = useState(false);
   return (
@@ -73,13 +74,16 @@ const AddHostel = () => {
 
 const GirlsHostelForm = () => {
   const { state = {} } = useLocation();
-  console.log(state);
 
   const [images, setImages] = useState([]);
 
   const { details, location } = useSelector((state) => state.room); //
 
   const [form] = Form.useForm(); //
+
+  useEffect(() => {
+    setPayment(localStorage.getItem("payment"));
+  }, [payment]);
 
   useEffect(() => {
     form.setFieldsValue({

@@ -81,8 +81,12 @@ const GirlsHostelForm = () => {
 
   const [form] = Form.useForm(); //
 
+  const [payment, setPayment] = useState(false);
   useEffect(() => {
-    setPayment(localStorage.getItem("payment"));
+    setInterval(() => {
+      console.log(localStorage.getItem("payment"));
+      setPayment(localStorage.getItem("payment"));
+    }, 5000);
   }, [payment]);
 
   useEffect(() => {
@@ -143,6 +147,7 @@ const GirlsHostelForm = () => {
     );
     if (data) {
       toast.success("hostel added successfully");
+      localStorage.setItem("payment", false);
     }
     // }
   };
@@ -241,13 +246,14 @@ const GirlsHostelForm = () => {
             multiple
           />
         </div>
-        <Khalti />
+
         <Form.Item>
-          <Button type="primary" htmlType="submit">
+          <Button type="primary" htmlType="submit" disabled={!payment}>
             submit
           </Button>
         </Form.Item>
       </Form>
+      <Khalti />
     </div>
   );
 };
@@ -260,6 +266,15 @@ const BoysHostelForm = () => {
   const { details, location } = useSelector((state) => state.room); //
 
   const [form] = Form.useForm(); //
+
+  const [payment, setPayment] = useState(false);
+  console.log(payment);
+  useEffect(() => {
+    setInterval(() => {
+      console.log(localStorage.getItem("payment"));
+      setPayment(localStorage.getItem("payment"));
+    }, 5000);
+  }, [payment]);
 
   useEffect(() => {
     form.setFieldsValue({
@@ -307,6 +322,7 @@ const BoysHostelForm = () => {
     );
     if (data) {
       toast.success("hostel added successfully");
+      localStorage.setItem("payment", false);
     }
   };
 
@@ -404,13 +420,14 @@ const BoysHostelForm = () => {
             multiple
           />
         </div>
-        <Khalti />
+
         <Form.Item>
-          <Button type="primary" htmlType="submit">
+          <Button type="primary" htmlType="submit" disabled={!payment}>
             Submit
           </Button>
         </Form.Item>
       </Form>
+      <Khalti />
     </div>
   );
 };
